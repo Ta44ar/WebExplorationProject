@@ -1,0 +1,2190 @@
+{
+  "nodes": [
+    {
+      "id": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "label": "Co na obiad | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/ciasta-i-torty",
+      "label": "Ciasta | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/",
+      "label": "Ania Gotuje | Tylko najlepsze przepisy"
+    },
+    {
+      "id": "https://aniagotuje.pl/info/wspolpraca",
+      "label": "Ania Gotuje - Wsp\u00F3\u0142praca"
+    },
+    {
+      "id": "https://aniagotuje.pl/user/login",
+      "label": "Logowanie | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/ciasteczka",
+      "label": "Ciasteczka | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/desery",
+      "label": "Desery | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/babeczki-i-muffiny",
+      "label": "Babeczki | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/paczki-i-oponki",
+      "label": "Proste przepisy na p\u0105czki | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/serniki",
+      "label": "Serniki | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/nalesniki-i-placki",
+      "label": "Nale\u015Bniki, placki i racuchy | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/chleby-i-bulki",
+      "label": "Przepisy na chleb | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/dania-bez-miesa",
+      "label": "Obiad bez mi\u0119sa | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/dania-rybne",
+      "label": "Ryby przepisy | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/dania-na-slodko",
+      "label": "Dania na s\u0142odko | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/zupy",
+      "label": "Zupy | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/salatki-i-surowki",
+      "label": "Sa\u0142atki | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/sosy-i-pasty",
+      "label": "Przepisy na sosy | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/przekaski",
+      "label": "Przek\u0105ski na imprez\u0119 | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/przetwory",
+      "label": "Przetwory | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/napoje-i-koktajle",
+      "label": "Koktajle | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/drinki-i-nalewki",
+      "label": "Drinki i nalewki | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/lody-domowe",
+      "label": "Lody domowe | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/przepisy/porady",
+      "label": "Triki kuchenne | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/pomysl-na/sniadanie",
+      "label": "Pomys\u0142 na \u015Bniadanie | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/pomysl-na/obiad",
+      "label": "Pomys\u0142 na obiad | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/pomysl-na/kolacja",
+      "label": "Pomys\u0142 na kolacj\u0119 | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/okazja/halloween",
+      "label": "Jedzenia na halloween | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/okazja/sylwester",
+      "label": "Przepisy na Sylwestra | AniaGotuje.pl"
+    },
+    {
+      "id": "https://aniagotuje.pl/okazja/tlusty-czwartek",
+      "label": "T\u0142usty Czwartek | AniaGotuje.pl"
+    },
+    {
+      "id": "https://www.przepisy.pl/przepisy/dania-i-przekaski/dania-glowne/dania-z-miesem",
+      "label": ""
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "label": "Przepisy na dania mi\u0119sne na gor\u0105co i z piekarnika - Po Pr..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/",
+      "label": "Po Prostu Pycha - Sprawdzone przepisy kulinarne - Blog ku..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/search/nale%C5%9Bniki",
+      "label": "Wyniki wyszukiwania \u0022nale\u015Bniki\u0022 - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/search/pizza",
+      "label": "Wyniki wyszukiwania \u0022pizza\u0022 - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/ulubione/",
+      "label": "Logowanie - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/search/sernik",
+      "label": "Wyniki wyszukiwania \u0022sernik\u0022 - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/login/",
+      "label": "Logowanie - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/popularne/",
+      "label": "Popularne - Przepisy od Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/",
+      "label": "Przepisy na s\u0142odko\u015Bci i ciasta - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/babeczki-i-muffiny/",
+      "label": "Przepisy na babeczki i muffiny - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/bez-pieczenia/",
+      "label": "Proste przepisy bez pieczenia na ciasta i desery - Po Pro..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/bezy/",
+      "label": "Bezy - Przepisy od Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/",
+      "label": "Ciasta - Przepisy od Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-biszkoptowe/",
+      "label": "Przepisy na ciasta na biszkopcie i babki wielkanocne - Po..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-drozdzowe/",
+      "label": "Przepisy na ciasta dro\u017Cd\u017Cowe z kruszonk\u0105, serem i owocami..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-kruche/",
+      "label": "Przepisy na ciasta i wypieki na kruchym cie\u015Bcie - Po Pros..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-ucierane/",
+      "label": "\u0141atwe przepisy na ciasta ucierane z truskawkami i jab\u0142kam..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-z-owocami/",
+      "label": "Sprawdzone przepisy na ciasta z owocami sezonowymi - Po P..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasteczka/",
+      "label": "Przepisy kulinarne na szybkie i dobre ciastka - Po Prostu..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/czekolada/",
+      "label": "Czekolada - Przepisy od Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/desery/",
+      "label": "Dobre przepisy na pyszne i szybkie desery - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/gofry/",
+      "label": "Przepisy na chrupi\u0105ce i domowe gofry - Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/pierniki/",
+      "label": "Przepisy na pierniki \u015Bwi\u0105teczne i bo\u017Conarodzeniowe - Po P..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/nalesniki-i-omlety/",
+      "label": "Przepisy na omlety i nale\u015Bniki na s\u0142odko i s\u0142ono - Po Pro..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/platki-owsiane/",
+      "label": "Przepisy z p\u0142atkami owsianymi na ciastka, batoniki i omle..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/rogaliki/",
+      "label": "Rogaliki - Przepisy od Po Prostu Pycha"
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/serniki/",
+      "label": "Przepisy kulinarne na serniki pieczone i na zimno - Po Pr..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/tarty-na-slodko/",
+      "label": "Przepisy na tarty na s\u0142odko z truskawkami i jab\u0142kami - Po..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/tlusty-czwartek/",
+      "label": "Przepisy na t\u0142usty czwartek - \u0142atwe i dobre - Po Prostu P..."
+    },
+    {
+      "id": "https://poprostupycha.com.pl/przepisy/slodkosci/torty/",
+      "label": "Torty - Przepisy od Po Prostu Pycha"
+    },
+    {
+      "id": "https://www.przepisy.pl/przepisy/szukaj/obiad-prosty-mieso",
+      "label": ""
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "label": "Ponad 810 najlepszych przepis\u00F3w na dania mi\u0119sne \u2022 Kuchnia..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/",
+      "label": "Przepisy kulinarne \u2022 Porady, inspiracje, triki \u2022 Kuchnia ..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/salatki",
+      "label": "Sa\u0142atki \u2014 przepisy i pomys\u0142y \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/przetwory",
+      "label": "Ponad 120 najlepszych przepis\u00F3w na przetwory \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/napoje",
+      "label": "Ponad 160 najlepszych przepis\u00F3w na napoje \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/fast-food",
+      "label": "Ponad 250 najlepszych przepis\u00F3w na fast foody \u2022 Kuchnia L..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/sniadania",
+      "label": "Ponad 660 najlepszych przepis\u00F3w na \u015Bniadania \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/przekaski-na-impreze",
+      "label": "Szybkie przek\u0105ski na imprez\u0119. Ponad 710 przepis\u00F3w \u2022 Kuchn..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/ciastka",
+      "label": "Przepisy na ciasta \u2022 Najlepsze pomys\u0142y \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/desery",
+      "label": "Ponad 500 najlepszych przepis\u00F3w na desery \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/halloween",
+      "label": "Halloween \u2022 Przepisy \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/boze-narodzenie",
+      "label": ""
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/ciasteczka",
+      "label": "Ciastka \u2022 Przepisy \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy",
+      "label": ""
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/weganskie-swieta",
+      "label": "Wega\u0144skie \u015Awi\u0119ta \u2022 Przepisy \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/rodzinne-przepisy",
+      "label": "Ponad 1940 najlepszych przepis\u00F3w na rodzinn\u0105 uczt\u0119 \u2022 Kuch..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/dania-glowne",
+      "label": ""
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/na-impreze",
+      "label": "Ponad 1110 najlepszych przepis\u00F3w na imprezowe przek\u0105ski \u2022..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/zupy",
+      "label": ""
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/romantyczna-kolacja",
+      "label": "Pomys\u0142y na romantyczn\u0105 kolacj\u0119 \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/tlusty-czwartek",
+      "label": "Ponad 30 najlepszych przepis\u00F3w na t\u0142usty czwartek \u2022 Kuchn..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/przyjecie-dla-dzieci",
+      "label": "Ponad 310 najlepszych przepis\u00F3w na przyj\u0119cie dla dzieci \u2022..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/wielkanoc",
+      "label": "Ponad 250 najlepszych przepis\u00F3w na Wielkanoc \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/walentynki",
+      "label": "Ponad 210 najlepszych przepis\u00F3w na romantyczne chwile we ..."
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/grill",
+      "label": "Ponad 260 najlepszych przepis\u00F3w na grilla \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/kuchnia-amerykanska",
+      "label": "Kuchnia ameryka\u0144ska \u2022 Ponad 260 przepis\u00F3w \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/piknik",
+      "label": "Ponad 390 najlepszych przepis\u00F3w na piknik \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/kuchnia-azjatycka",
+      "label": "Kuchnia azjatycka \u2022 Ponad 280 przepis\u00F3w \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/kuchnia-francuska",
+      "label": "Kuchnia francuska \u2022 Ponad 220 przepis\u00F3w \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://kuchnialidla.pl/przepisy/kuchnia-czeska",
+      "label": "Kuchnia czeska \u2022 Ponad 20 przepis\u00F3w \u2022 Kuchnia Lidla"
+    },
+    {
+      "id": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "label": "Pomys\u0142y (900\u002B) na temat DANIA MI\u0118SNE, kt\u00F3re mo\u017Cesz zapisa..."
+    },
+    {
+      "id": "https://pl.pinterest.com/",
+      "label": "Pinterest - Polska"
+    },
+    {
+      "id": "https://pl.pinterest.com/baska56/",
+      "label": "Ba\u015Bka 56 (baska56) - Profile | Pinterest"
+    },
+    {
+      "id": "https://pl.pinterest.com/search/pins/?q=Fried%20chicken%20cutlets\u0026rs=blp",
+      "label": "Pinterest - Polska"
+    },
+    {
+      "id": "https://pl.pinterest.com/search/pins/?q=Homemade%20yogurt%20recipes\u0026rs=blp",
+      "label": "Pinterest - Polska"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas",
+      "label": "Explore the best of Pinterest"
+    },
+    {
+      "id": "https://pl.pinterest.com/search/pins/?q=Spicy%20fried%20chicken\u0026rs=blp",
+      "label": "Pinterest - Polska"
+    },
+    {
+      "id": "https://pl.pinterest.com/search/pins/?q=Foods%20with%20gluten\u0026rs=blp",
+      "label": "Pinterest - Polska"
+    },
+    {
+      "id": "https://pl.pinterest.com/search/pins/?q=German%20cucumber%20salad\u0026rs=blp",
+      "label": "Pinterest - Polska"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/ethnic-recipes/910155113124/",
+      "label": "Ethnic Recipes"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/meat-dinners/928654191662/",
+      "label": "Meat Dinners"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/polish-recipes/930661386136/",
+      "label": "Polish Recipes"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/workout-food/907981090503/",
+      "label": "Workout Food"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/food-and-drink/918530398158/",
+      "label": "Cook your next meals with recipes from Pinterest"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/fried-chicken-cutlets/930686584556/",
+      "label": "Fried Chicken Cutlets"
+    },
+    {
+      "id": "https://pl.pinterest.com/pin/224335625187719312/",
+      "label": "Rozbijam cienko schab i smaruj\u0119 go serkiem topionym. 100 ..."
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/bacon-wrapped-meat-with-potatoes/960357877091/",
+      "label": "Bacon-wrapped Meat with Potatoes"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/bacon-wrapped-meat-rolls-in-skillet/922453566070/",
+      "label": "Bacon-wrapped Meat Rolls in Skillet"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/bacon-wrapped-meat-rolls-in-pan/952311607770/",
+      "label": "Bacon-wrapped Meat Rolls in Pan"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/sosie-bacon/927357510328/",
+      "label": "Sosie Bacon"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/polish-breaded-pork-cutlets-schabowe/915771612855/",
+      "label": "Polish Breaded Pork Cutlets Schabowe"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/kotlety-with-mushroom-sauce/955298423125/",
+      "label": "Kotlety with Mushroom Sauce"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/ranch-dressing-recipe/921919910234/",
+      "label": "Ranch Dressing Recipe"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/grill-party/917113833099/",
+      "label": "Grill Party"
+    },
+    {
+      "id": "https://pl.pinterest.com/pin/224335625188065842/",
+      "label": "\u0422\u044B \u0434\u043E \u0441\u0438\u0445 \u043F\u043E\u0440 \u043E\u0431\u0432\u0430\u043B\u0438\u0432\u0430\u0435\u0448\u044C \u043A\u0443\u0440\u044F\u0442\u0438\u043D\u0443 \u0434\u043B\u044F \u043E\u0442\u0431\u0438\u0432\u043D\u044B\u0445 \u0432 \u044F\u0439\u0446\u0435 \u0438 ..."
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/dip/917568434512/",
+      "label": "Dip"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/baked-chicken-cutlets/947805659962/",
+      "label": "Baked Chicken Cutlets"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/chicken-cutlets/932379065588/",
+      "label": "Chicken Cutlets"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/baked-chicken/905806876970/",
+      "label": "Baked Chicken"
+    },
+    {
+      "id": "https://pl.pinterest.com/ideas/%D0%B7%D0%B4%D0%BE%D1%80%D0%BE%D0%B2%D0%BE%D0%B5-%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/939331270551/",
+      "label": "\u0417\u0434\u043E\u0440\u043E\u0432\u043E\u0435 \u041F\u0438\u0442\u0430\u043D\u0438\u0435"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "label": "Tanie gotowanie - przepisy na dania mi\u0119sne | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/o-klubie/?utm_source=WINIARY\u0026utm_medium=button_belka\u0026utm_campaign=O_Klubie",
+      "label": "Klub WINIARY: z czym to si\u0119\u2026 JE*? | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/",
+      "label": "WINIARY - odkrywaj przepisy na pyszne dania"
+    },
+    {
+      "id": "https://www.winiary.pl/nasze-produkty/",
+      "label": "Produkty WINIARY idealnie dobrane do Twojej kuchni"
+    },
+    {
+      "id": "https://www.winiary.pl/szukaj/",
+      "label": "Szukaj | Winiary"
+    },
+    {
+      "id": "https://www.winiary.pl/majonez-dekoracyjny?tag=swieta",
+      "label": "Majonez Dekoracyjny | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/mymenuplan/",
+      "label": "Zaloguj si\u0119 do swojego konta | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/login/?destination=my-preferences",
+      "label": "Zaloguj si\u0119 do swojego konta | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/pomagamy-w-gotowaniu-i-niemarnowaniu/",
+      "label": "Pomagamy w gotowaniu i niemarnowaniu | Winiary"
+    },
+    {
+      "id": "https://www.winiary.pl/szukaj",
+      "label": "Szukaj | Winiary"
+    },
+    {
+      "id": "https://www.winiary.pl/porady/",
+      "label": "Kulinarne inspiracje i porady od WINIARY | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/kuchnia-sezonowa-jesien/",
+      "label": "Kuchnia sezonowa - jesie\u0144 | Winiary"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/air-fryer/",
+      "label": "Przepisy z airfryer | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/przepisy/",
+      "label": "Przepisy na najlepsze dania od WINIARY | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/obiad/",
+      "label": "Przepisy na obiad - co na obiad?| WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/sniadanie/",
+      "label": "Pomys\u0142y na \u015Bniadanie - przepisy i inspiracje | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/kolacja/",
+      "label": "Kolacja - przepisy na pyszne dania na kolacj\u0119 | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/dania-i-przekaski/",
+      "label": "Przepisy na dania i przek\u0105ski - pomys\u0142y i inspiracje | WI..."
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/desery/",
+      "label": "Najlepsze desery - przepisy i inspiracje | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/okazja/",
+      "label": "Przepisy i inspiracje na dania na specjalne okazje| WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/kategorie-produktow/",
+      "label": "Nasze najwa\u017Cniejsze kategorie produkt\u00F3w | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/majonez-dekoracyjny/?tag=swieta",
+      "label": "Majonez Dekoracyjny | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/produkty/majonezy-winiary-katalog-naszych-produktow/",
+      "label": "Majonezy WINIARY - katalog naszych produkt\u00F3w | Winiary"
+    },
+    {
+      "id": "https://www.winiary.pl/majonez-dekoracyjny/recykling/",
+      "label": "Majonez Dekoracyjny recykling | Winiary"
+    },
+    {
+      "id": "https://www.winiary.pl/daj-sloikom-nowe-zycie-konkurs-Winiary/",
+      "label": "Daj s\u0142oikom nowe \u017Cycie | Winiary"
+    },
+    {
+      "id": "https://www.winiary.pl/login/?destination=Strefa-GGrill",
+      "label": "Zaloguj si\u0119 do swojego konta | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/login/?destination=mymenuplan",
+      "label": "Zaloguj si\u0119 do swojego konta | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/przepis/nie-marnujemy/",
+      "label": "Jak nie marnowa\u0107 jedzenia? Pomys\u0142y na smaczne dania | WIN..."
+    },
+    {
+      "id": "https://www.winiary.pl/porady-i-inspiracje",
+      "label": "Triki, porady i inspiracje PWGiN | WINIARY"
+    },
+    {
+      "id": "https://www.winiary.pl/foodsharing/",
+      "label": "Foodsharing - koniec z marnowaniem | WINIARY"
+    },
+    {
+      "id": "https://www.facebook.com/BlogMadameEdith/posts/klopsiki-mi%C4%99sno-warzywne-w-sosie-pomidorowym-to-super-pomys%C5%82-na-obiad-dla-ca%C5%82ej-/1180076346815146/",
+      "label": "Madame Edith - Klopsiki mi\u0119sno-warzywne w sosie..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "label": "5 mi\u0119snych obiad\u00F3w, dzi\u0119ki kt\u00F3rym m\u0105\u017C pokocha Ci\u0119 jeszcze..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2025/05/czy-warto-wymienic-tm6-na-tm7-podobienstwa-i-roznice.html",
+      "label": "Czy warto wymieni\u0107 TM6 na TM7? Podobie\u0144stwa i r\u00F3\u017Cnice - M..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2025/05/thermomix-tm7-czy-warto-kupic-nowosc-od-vorwerk-oferta-na-maj-2025.html",
+      "label": "Thermomix TM7 \u2013 czy warto kupi\u0107 nowo\u015B\u0107 od Vorwerk? Oferta..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2024/04/thermomix-oferta-kwiecien-2024-kup-teraz.html",
+      "label": "Thermomix - nowo\u015Bci i oferta KWIECIE\u0143 2024 - Magda M. i T..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/",
+      "label": "Magda M. i Thermomix - Thermomix, gotowanie, kobieco\u015B\u0107, m..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/o-mnie",
+      "label": "O MNIE - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko",
+      "label": "Mama i dziecko - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko/fit-mama",
+      "label": "Fit mama - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko/kreatywna-mama",
+      "label": "Kreatywna mama - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko/lifestyle",
+      "label": "Lifestyle - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko/madra-mama",
+      "label": "M\u0105dra mama - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko/mama-z-brzuszkiem",
+      "label": "Mama z brzuszkiem - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko/sprytna-mama",
+      "label": "Sprytna mama - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/category/mama-i-dziecko/zadbana-mama",
+      "label": "Zadbana mama - Magda M. i Thermomix"
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/05/fit-planner-do-druku.html",
+      "label": "Fit planner do druku - monitoruj swoje post\u0119py! - Magda M..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2019/10/cud-miod-catering-recenzja.html",
+      "label": "Cud i Mi\u00F3d - czy mo\u017Ce by\u0107 lepiej? Recenzja cateringu diet..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2019/09/vitalia-holia-moje-doswiadczenia.html",
+      "label": "Moje do\u015Bwiadczenia z Vitali\u0105 Holia - czy schud\u0142am i czego..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2019/07/holia-vs-smacznie-dopasowana-ktora-wybrac.html",
+      "label": "Vitalia Holia vs Smacznie Dopasowana - kt\u00F3r\u0105 wybra\u0107? - Ma..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/04/10-prac-plastycznych-do-zrobienia-z-dzieckiem-w-maju-laurki.html",
+      "label": "10 prac plastycznych do zrobienia z dzieckiem w maju \u002B 5 ..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/04/10-nietypowych-sposobow-na-farbowanie-i-ozdabianie-jajek.html",
+      "label": "10 nietypowych sposob\u00F3w na farbowanie i ozdabianie jajek ..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/04/45-wielkanocnych-prac-dla-dzieci.html",
+      "label": "45 wielkanocnych prac dla dzieci - zaj\u0105czki, jajka, kurcz..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/03/prace-plastyczne-dla-dzieci-marzec.html",
+      "label": "10 prac plastycznych do zrobienia z dzieckiem w marcu - M..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2022/07/magda-m-powraca-z-pasja-i-miloscia-do-thermomix.html",
+      "label": "Magda M. powraca - z pasj\u0105 i mi\u0142o\u015Bci\u0105 do Thermomix - Magd..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/07/thermomix-czy-warto-jak-zaczac.html",
+      "label": "Thermomix - od czego zacz\u0105\u0107 i czy warto wyda\u0107 5 tysi\u0119cy n..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/06/sztuka-odpuszczania.html",
+      "label": "Najtrudniejsze w macierzy\u0144stwie. O sztuce odpuszczania - ..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/08/zerowka-pierwsza-klasa-umiejetnosci-wyprawka-wskazowki.html",
+      "label": "Zer\u00F3wka i pierwsza klasa - umiej\u0119tno\u015Bci dziecka, wyprawka..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/05/co-moze-ci-dac-test-osobowosci.html",
+      "label": "Czy wiesz co mo\u017Ce Ci da\u0107 test osobowo\u015Bci? \u002B jak sobie rad..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2020/02/jakie-pieluchomajtki-wybrac-test-i-recenzja.html",
+      "label": "Jakie pieluchomajtki wybra\u0107 - najwi\u0119kszy test i recenzja ..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2019/08/jak-przygotowac-przedszkolaka-na-pojscie-do-szkoly.html",
+      "label": "Jak przygotowa\u0107 przedszkolaka na p\u00F3j\u015Bcie do szko\u0142y - Magd..."
+    },
+    {
+      "id": "https://www.magdam.com.pl/2018/09/wszystko-co-musisz-wiedziec-o-noworodku.html",
+      "label": "Wszystko co musisz wiedzie\u0107 o noworodku przed zostaniem m..."
+    },
+    {
+      "id": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "label": "Pomys\u0142y na obiad bez mi\u0119sa \u2013 nie tylko dla wegetarian! \u2013 ..."
+    },
+    {
+      "id": "https://mumandthecity.pl/",
+      "label": "Mum and the city \u2013 Blog parentingowy dla wymagajacych"
+    },
+    {
+      "id": "https://mumandthecity.pl/fleksitarianizm-w-praktyce-czyli-jak-ograniczyc-spozycie-miesa-gdy-maz-sie-buntuje-przepisy-produkty-wskazowki/",
+      "label": "Fleksitarianizm w praktyce, czyli jak ograniczy\u0107 spo\u017Cycie..."
+    },
+    {
+      "id": "https://mumandthecity.pl/category/health/",
+      "label": "Przepisy \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/tag/przepisy/",
+      "label": "przepisy \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/author/ilona/",
+      "label": "Ilona Kostecka \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/pad-thai-przepis/",
+      "label": "Patataj, czyli moje ulubione danie. \u0141atwy przepis, dzi\u0119ki..."
+    },
+    {
+      "id": "https://mumandthecity.pl/czas-dla-siebie/",
+      "label": "Nie przysi\u0119ga\u0142a\u015B na \u015Blubnym kobiercu: \u201EI \u017Ce ci\u0119 nie opusz..."
+    },
+    {
+      "id": "https://mumandthecity.pl/idealna-matka/",
+      "label": "Czego tak naprawd\u0119 potrzebuje twoje dziecko? Wcale nie id..."
+    },
+    {
+      "id": "https://mumandthecity.pl/o-mnie/policy/",
+      "label": "POLITYKA PRYWATNO\u015ACI I PLIK\u00D3W COOKIES \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/jak-nie-podjadac/",
+      "label": "10 sposob\u00F3w, by przesta\u0107 podjada\u0107 i zmieni\u0107 diet\u0119 na zdro..."
+    },
+    {
+      "id": "https://mumandthecity.pl/tag/zdrowie/",
+      "label": "zdrowie \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/golabki-wegetarianskie/",
+      "label": "Przepis na najlepsze go\u0142\u0105bki wegetaria\u0144skie jakie jad\u0142am!..."
+    },
+    {
+      "id": "https://mumandthecity.pl/seriale-o-nastolatkach/",
+      "label": "Seriale o nastolatkach, kt\u00F3re warto obejrze\u0107, je\u015Bli jeste..."
+    },
+    {
+      "id": "https://mumandthecity.pl/jak-wzmacniac-wiez-z-dzieckiem/",
+      "label": "15 pomys\u0142\u00F3w, jak wzmacnia\u0107 wi\u0119\u017A z dzieckiem. Ka\u017Cdego dnia..."
+    },
+    {
+      "id": "https://mumandthecity.pl/zdrowe-przekaski-dla-dziecka-i-nie-tylko/",
+      "label": "Zdrowe przek\u0105ski dla dziecka (i nie tylko!) \u2013 Mum and the..."
+    },
+    {
+      "id": "https://mumandthecity.pl/zdrowy-obiad/",
+      "label": "Zdrowy obiad nie musi by\u0107 pracoch\u0142onny! Zdrowe i szybkie ..."
+    },
+    {
+      "id": "https://mumandthecity.pl/przepis-na-ramen/",
+      "label": "Przepis na ramen \u2013 wegetaria\u0144ski, kt\u00F3rym mo\u017Cna si\u0119 do wol..."
+    },
+    {
+      "id": "https://mumandthecity.pl/kimchi-przepis/",
+      "label": "Podobno chroni przed koronk\u0105. Przepis na oryginalne, kore..."
+    },
+    {
+      "id": "https://mumandthecity.pl/category/ostatnie-wpisy/",
+      "label": "Ostatnie wpisy \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/gotowe-dania/",
+      "label": "Gotowe dania: kiedy nie chcesz sta\u0107 w kuchni! \u2013 Mum and t..."
+    },
+    {
+      "id": "https://mumandthecity.pl/category/health/page/2/",
+      "label": "Przepisy \u2013 Strona 2 \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/category/health/page/13/",
+      "label": "Przepisy \u2013 Strona 13 \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/przepis-na-tarte/",
+      "label": "Kuchnia w czasach kryzysu, czyli przepis na francusk\u0105 piz..."
+    },
+    {
+      "id": "https://mumandthecity.pl/tag/przepisy/page/2/",
+      "label": "przepisy \u2013 Strona 2 \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/tag/przepisy/page/10/",
+      "label": "przepisy \u2013 Strona 10 \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/idealny-prezent/",
+      "label": "Lista najgorszych prezent\u00F3w pod choink\u0119 \u002B jeden IDEALNY, ..."
+    },
+    {
+      "id": "https://mumandthecity.pl/category/woman/",
+      "label": "Kobieta \u2013 Mum and the city"
+    },
+    {
+      "id": "https://mumandthecity.pl/majtki-menstruacyjne/",
+      "label": "Wypr\u00F3bowa\u0142am majtki menstruacyjne, a teraz porozmawiajmy ..."
+    },
+    {
+      "id": "https://mumandthecity.pl/spotykasz-siebie-po-porodzie-i-mozesz-cos-doradzic-co-mowisz-bo-ja-to/",
+      "label": "Spotykasz siebie po porodzie i mo\u017Cesz co\u015B doradzi\u0107. Co m\u00F3..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "label": "Kuchnia po mojemu: Pomys\u0142 na obiad z niczego, czyli pikan..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/",
+      "label": "Kuchnia po mojemu"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/p/smaki.html",
+      "label": "Kuchnia po mojemu: Spin-D\u017Citsu smakuje \u015Bwiat"
+    },
+    {
+      "id": "http://cytryny-jak-maliny.blogspot.com/2013/09/indyk-z-kurczakiem-zapieczone-w-papryce.html",
+      "label": "Kuchnia po mojemu: Indyk z kurczakiem zapieczone w papryc..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/p/kontakt.html",
+      "label": "Kuchnia po mojemu: Wsp\u00F3\u0142praca i kontakt"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/p/blog-page.html",
+      "label": "Kuchnia po mojemu: Po mojemu i o mnie"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/search/label/danie%20obiadowe",
+      "label": "Kuchnia po mojemu: danie obiadowe"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/search/label/kurczak",
+      "label": "Kuchnia po mojemu: kurczak"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/search/label/pikantne",
+      "label": "Kuchnia po mojemu: pikantne"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/search/label/ry%C5%BC",
+      "label": "Kuchnia po mojemu: ry\u017C"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1378401043784",
+      "label": "Kuchnia po mojemu: Pomys\u0142 na obiad z niczego, czyli pikan..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1378414926629",
+      "label": "Kuchnia po mojemu: Pomys\u0142 na obiad z niczego, czyli pikan..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1378424397486",
+      "label": "Kuchnia po mojemu: Pomys\u0142 na obiad z niczego, czyli pikan..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1379003783463",
+      "label": "Kuchnia po mojemu: Pomys\u0142 na obiad z niczego, czyli pikan..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1381919650769",
+      "label": "Kuchnia po mojemu: Pomys\u0142 na obiad z niczego, czyli pikan..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/chrupiace-placki-ziemniaczane-z-cebulka.html",
+      "label": "Kuchnia po mojemu: Chrupi\u0105ce placki ziemniaczane z cebulk..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/zamiast-przekaski-smakowita-kolacja.html",
+      "label": "Kuchnia po mojemu: Zamiast prz\u0119k\u0105ski smakowita kolacja, c..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/feeds/2754034577348672444/comments/default",
+      "label": ""
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/10/delikatna-ryzanka-czyli-nieefektowna.html",
+      "label": "Kuchnia po mojemu: Delikatna ry\u017Canka, czyli nieefektowna ..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2020/07/szynka-pieczona-w-keczupie-i-coli.html",
+      "label": "Kuchnia po mojemu: Szynka pieczona w keczupie i coli. Syc..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2013/09/kluski-yzka-kadzione-z-maki.html",
+      "label": "Kuchnia po mojemu: Kluski \u0142y\u017Ck\u0105 k\u0142adzione z m\u0105ki pe\u0142nozia..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2014/06/kurczak-w-garnku-pieczony-bez-tuszczu.html",
+      "label": "Kuchnia po mojemu: Kurczak w garnku pieczony. Bez t\u0142uszczu."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2014/02/kluski-slaskie-smazone-po-mezowsku.html",
+      "label": "Kuchnia po mojemu: Kluski \u015Bl\u0105skie sma\u017Cone po M\u0119\u017Cowsku. Uw..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2022/02/galaretki-z-kolanek-wieprzowych-i-apek.html",
+      "label": "Kuchnia po mojemu: Galaretki z kolanek wieprzowych i \u0142ape..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2016/11/prosty-roso-z-grzybow-opienka-miodowa.html",
+      "label": "Kuchnia po mojemu: Prosty ros\u00F3\u0142 z grzyb\u00F3w. Opie\u0144ka miodowa"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2020/09/indyk-w-cebuli-na-szybki-smaczny-obiad.html",
+      "label": "Kuchnia po mojemu: Indyk w cebuli na szybki smaczny obiad..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2015/09/dietetyczne-mega-roladki-schabowe-dla.html",
+      "label": "Kuchnia po mojemu: Dietetyczne mega-roladki schabowe dla ..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/2014/03/karkowka-pieczona-w-majonezie-i.html",
+      "label": "Kuchnia po mojemu: Kark\u00F3wka pieczona w majonezie i keczup..."
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/search/label/dodatki",
+      "label": "Kuchnia po mojemu: dodatki"
+    },
+    {
+      "id": "https://cytryny-jak-maliny.blogspot.com/search/label/obiad%20dla%20dziecka",
+      "label": "Kuchnia po mojemu: obiad dla dziecka"
+    },
+    {
+      "id": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "label": "Co je\u015B\u0107 na obiad zamiast mi\u0119sa ? Oto pytanie, na kt\u00F3re ma..."
+    },
+    {
+      "id": "https://ammniam.pl/o-mnie/",
+      "label": "O MNIE - Ammniam"
+    },
+    {
+      "id": "https://ammniam.pl/",
+      "label": "Home - Ammniam"
+    },
+    {
+      "id": "https://ammniam.pl/portfolio/",
+      "label": "Portfolio - Ammniam"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/przepisy/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/wspolpraca-i-kontakt/",
+      "label": "Oferta - Ammniam"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/sniadania/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/na-chleb/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/lunche/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/dania-glowne-2/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/slodkosci/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/dodatki/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/kontakt/",
+      "label": "KONTAKT - Ammniam"
+    },
+    {
+      "id": "https://ammniam.pl/moje-wakacyjne-gotowanie/",
+      "label": "Moje wakacyjne gotowanie. Jak celebrujemy lato i co jemy ..."
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/artykuly/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/product/roslinny-obiad-jesien-i-zima/",
+      "label": "\u0022Ro\u015Blinny obiad. Jesie\u0144 i zima\u0022 - kup e-booka - Ammniam"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/lifestyle/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/kategoria/zdrowe-odzywianie/",
+      "label": "ammniam.pl"
+    },
+    {
+      "id": "https://ammniam.pl/rozmowa-z-katarzyna-jankowska-mama-alergika-gotuje/",
+      "label": "Jak zmiana od\u017Cywiania zmienia \u017Cycie - rozmowa z Katarzyn\u0105..."
+    },
+    {
+      "id": "https://ammniam.pl/jak-zmiana-odzywiania-zmienia-zycie-rozmowa-z-magda-wieczorek/",
+      "label": "Jak zmiana od\u017Cywiania zmienia \u017Cycie - rozmowa z Magd\u0105 Wie..."
+    },
+    {
+      "id": "http://ammniam.pl/wspolpraca-i-kontakt/",
+      "label": "Oferta - Ammniam"
+    },
+    {
+      "id": "http://ammniam.pl/",
+      "label": "Home - Ammniam"
+    },
+    {
+      "id": "https://ammniam.pl/salatka-ze-szparagami-bulgurem-i-wedzonym-tofu/",
+      "label": "Sa\u0142atka ze szparagami, bulgurem i w\u0119dzonym tofu - Ammniam."
+    },
+    {
+      "id": "https://ammniam.pl/makaron-z-sosem-porowo-groszkowo-smietanowym/",
+      "label": "Makaron w sosie porowo-groszkowo-\u015Bmietanowym z w\u0119dzonym t..."
+    },
+    {
+      "id": "https://ammniam.pl/czekoladowe-medaliony-z-sezamem/",
+      "label": "Czekoladowe medaliony - pomys\u0142 na pyszny deser z trzech s..."
+    },
+    {
+      "id": "https://ammniam.pl/weganskie-gofry-z-fasoli/",
+      "label": "Wega\u0144skie gofry z fasoli - pyszny pomys\u0142 na str\u0105czki."
+    },
+    {
+      "id": "https://ammniam.pl/weganski-ramen-po-mojemu/",
+      "label": "Wega\u0144ski ramen po mojemu - nieco egzotyki w polskim wydaniu."
+    },
+    {
+      "id": "https://ammniam.pl/kotlety-mielone-z-tofu/",
+      "label": "Kotlety mielone z tofu - pyszny obiad jak u mamy gwaranto..."
+    },
+    {
+      "id": "https://ammniam.pl/weganski-kebeb-z-tofu-z-surowka-z-czerwonej-kapusty/",
+      "label": "Wega\u0144ski kebab z tofu z sur\u00F3wk\u0105 z czerwonej kapusty"
+    },
+    {
+      "id": "https://ammniam.pl/roslinna-uczta-smakow-moja-trzecia-ksiazka/",
+      "label": "Ro\u015Blinna uczta smak\u00F3w - moja trzecie ksi\u0105\u017Cka ju\u017C dost\u0119pna"
+    }
+  ],
+  "edges": [
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/dania-miesne"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/ciasta-i-torty"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/info/wspolpraca"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/user/login"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/ciasteczka"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/desery"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/babeczki-i-muffiny"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/paczki-i-oponki"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/serniki"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/nalesniki-i-placki"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/chleby-i-bulki"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/dania-bez-miesa"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/dania-rybne"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/dania-na-slodko"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/zupy"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/salatki-i-surowki"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/sosy-i-pasty"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/przekaski"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/przetwory"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/napoje-i-koktajle"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/drinki-i-nalewki"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/lody-domowe"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/przepisy/porady"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/pomysl-na/sniadanie"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/pomysl-na/obiad"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/pomysl-na/kolacja"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/okazja/halloween"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/okazja/sylwester"
+    },
+    {
+      "from": "https://aniagotuje.pl/przepisy/dania-miesne",
+      "to": "https://aniagotuje.pl/okazja/tlusty-czwartek"
+    },
+    {
+      "from": "https://www.przepisy.pl/przepisy/dania-i-przekaski/dania-glowne/dania-z-miesem",
+      "to": "https://www.przepisy.pl/przepisy/dania-i-przekaski/dania-glowne/dania-z-miesem"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/search/nale%C5%9Bniki"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/search/pizza"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/ulubione/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/search/sernik"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/login/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/popularne/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/babeczki-i-muffiny/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/bez-pieczenia/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/bezy/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-biszkoptowe/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-drozdzowe/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-kruche/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-ucierane/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/ciasta-z-owocami/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasteczka/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/czekolada/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/desery/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/gofry/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/pierniki/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/nalesniki-i-omlety/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/platki-owsiane/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/rogaliki/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/ciasta/serniki/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/tarty-na-slodko/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/tlusty-czwartek/"
+    },
+    {
+      "from": "https://poprostupycha.com.pl/przepisy/obiady/dania-miesne/",
+      "to": "https://poprostupycha.com.pl/przepisy/slodkosci/torty/"
+    },
+    {
+      "from": "https://www.przepisy.pl/przepisy/szukaj/obiad-prosty-mieso",
+      "to": "https://www.przepisy.pl/przepisy/szukaj/obiad-prosty-mieso"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/salatki"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/przetwory"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/napoje"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/fast-food"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/sniadania"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/przekaski-na-impreze"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/ciastka"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/desery"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/halloween"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/boze-narodzenie"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/ciasteczka"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/weganskie-swieta"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/rodzinne-przepisy"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/dania-glowne"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/na-impreze"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/zupy"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/romantyczna-kolacja"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/tlusty-czwartek"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/przyjecie-dla-dzieci"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/wielkanoc"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/walentynki"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/grill"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/kuchnia-amerykanska"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/piknik"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/kuchnia-azjatycka"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/kuchnia-francuska"
+    },
+    {
+      "from": "https://kuchnialidla.pl/przepisy/dania-glowne/dania-miesne",
+      "to": "https://kuchnialidla.pl/przepisy/kuchnia-czeska"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/baska56/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/search/pins/?q=Fried%20chicken%20cutlets\u0026rs=blp"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/search/pins/?q=Homemade%20yogurt%20recipes\u0026rs=blp"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/search/pins/?q=Spicy%20fried%20chicken\u0026rs=blp"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/search/pins/?q=Foods%20with%20gluten\u0026rs=blp"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/search/pins/?q=German%20cucumber%20salad\u0026rs=blp"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/ethnic-recipes/910155113124/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/meat-dinners/928654191662/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/polish-recipes/930661386136/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/workout-food/907981090503/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/food-and-drink/918530398158/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/fried-chicken-cutlets/930686584556/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/pin/224335625187719312/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/bacon-wrapped-meat-with-potatoes/960357877091/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/bacon-wrapped-meat-rolls-in-skillet/922453566070/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/bacon-wrapped-meat-rolls-in-pan/952311607770/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/sosie-bacon/927357510328/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/polish-breaded-pork-cutlets-schabowe/915771612855/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/kotlety-with-mushroom-sauce/955298423125/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/ranch-dressing-recipe/921919910234/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/grill-party/917113833099/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/pin/224335625188065842/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/dip/917568434512/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/baked-chicken-cutlets/947805659962/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/chicken-cutlets/932379065588/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/baked-chicken/905806876970/"
+    },
+    {
+      "from": "https://pl.pinterest.com/baska56/dania-mi%C4%99sne/",
+      "to": "https://pl.pinterest.com/ideas/%D0%B7%D0%B4%D0%BE%D1%80%D0%BE%D0%B2%D0%BE%D0%B5-%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/939331270551/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/o-klubie/?utm_source=WINIARY\u0026utm_medium=button_belka\u0026utm_campaign=O_Klubie"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/nasze-produkty/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/szukaj/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/majonez-dekoracyjny?tag=swieta"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/mymenuplan/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/login/?destination=my-preferences"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/pomagamy-w-gotowaniu-i-niemarnowaniu/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/szukaj"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/porady/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/kuchnia-sezonowa-jesien/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/air-fryer/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepisy/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/obiad/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/sniadanie/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/kolacja/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/dania-i-przekaski/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/desery/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/okazja/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/kategorie-produktow/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/majonez-dekoracyjny/?tag=swieta"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/produkty/majonezy-winiary-katalog-naszych-produktow/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/majonez-dekoracyjny/recykling/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/daj-sloikom-nowe-zycie-konkurs-Winiary/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/login/?destination=Strefa-GGrill"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/login/?destination=mymenuplan"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/przepis/nie-marnujemy/"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/porady-i-inspiracje"
+    },
+    {
+      "from": "https://www.winiary.pl/przepis/tanie-gotowanie/miesny/",
+      "to": "https://www.winiary.pl/foodsharing/"
+    },
+    {
+      "from": "https://www.facebook.com/BlogMadameEdith/posts/klopsiki-mi%C4%99sno-warzywne-w-sosie-pomidorowym-to-super-pomys%C5%82-na-obiad-dla-ca%C5%82ej-/1180076346815146/",
+      "to": "https://www.facebook.com/BlogMadameEdith/posts/klopsiki-mi%C4%99sno-warzywne-w-sosie-pomidorowym-to-super-pomys%C5%82-na-obiad-dla-ca%C5%82ej-/1180076346815146/"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2025/05/czy-warto-wymienic-tm6-na-tm7-podobienstwa-i-roznice.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2025/05/thermomix-tm7-czy-warto-kupic-nowosc-od-vorwerk-oferta-na-maj-2025.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2024/04/thermomix-oferta-kwiecien-2024-kup-teraz.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/o-mnie"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko/fit-mama"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko/kreatywna-mama"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko/lifestyle"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko/madra-mama"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko/mama-z-brzuszkiem"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko/sprytna-mama"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/category/mama-i-dziecko/zadbana-mama"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/05/fit-planner-do-druku.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2019/10/cud-miod-catering-recenzja.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2019/09/vitalia-holia-moje-doswiadczenia.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2019/07/holia-vs-smacznie-dopasowana-ktora-wybrac.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/04/10-prac-plastycznych-do-zrobienia-z-dzieckiem-w-maju-laurki.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/04/10-nietypowych-sposobow-na-farbowanie-i-ozdabianie-jajek.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/04/45-wielkanocnych-prac-dla-dzieci.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/03/prace-plastyczne-dla-dzieci-marzec.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2022/07/magda-m-powraca-z-pasja-i-miloscia-do-thermomix.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/07/thermomix-czy-warto-jak-zaczac.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/06/sztuka-odpuszczania.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/08/zerowka-pierwsza-klasa-umiejetnosci-wyprawka-wskazowki.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/05/co-moze-ci-dac-test-osobowosci.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2020/02/jakie-pieluchomajtki-wybrac-test-i-recenzja.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2019/08/jak-przygotowac-przedszkolaka-na-pojscie-do-szkoly.html"
+    },
+    {
+      "from": "https://www.magdam.com.pl/2019/01/5-miesnych-obiadow.html",
+      "to": "https://www.magdam.com.pl/2018/09/wszystko-co-musisz-wiedziec-o-noworodku.html"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/fleksitarianizm-w-praktyce-czyli-jak-ograniczyc-spozycie-miesa-gdy-maz-sie-buntuje-przepisy-produkty-wskazowki/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/category/health/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/tag/przepisy/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/author/ilona/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/pad-thai-przepis/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/czas-dla-siebie/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/idealna-matka/"
+    },
+    {
+      "from": "https://mumandthecity.pl/pomysly-na-obiad-bez-miesa/",
+      "to": "https://mumandthecity.pl/o-mnie/policy/"
+    },
+    {
+      "from": "https://mumandthecity.pl/fleksitarianizm-w-praktyce-czyli-jak-ograniczyc-spozycie-miesa-gdy-maz-sie-buntuje-przepisy-produkty-wskazowki/",
+      "to": "https://mumandthecity.pl/jak-nie-podjadac/"
+    },
+    {
+      "from": "https://mumandthecity.pl/fleksitarianizm-w-praktyce-czyli-jak-ograniczyc-spozycie-miesa-gdy-maz-sie-buntuje-przepisy-produkty-wskazowki/",
+      "to": "https://mumandthecity.pl/tag/zdrowie/"
+    },
+    {
+      "from": "https://mumandthecity.pl/fleksitarianizm-w-praktyce-czyli-jak-ograniczyc-spozycie-miesa-gdy-maz-sie-buntuje-przepisy-produkty-wskazowki/",
+      "to": "https://mumandthecity.pl/golabki-wegetarianskie/"
+    },
+    {
+      "from": "https://mumandthecity.pl/fleksitarianizm-w-praktyce-czyli-jak-ograniczyc-spozycie-miesa-gdy-maz-sie-buntuje-przepisy-produkty-wskazowki/",
+      "to": "https://mumandthecity.pl/seriale-o-nastolatkach/"
+    },
+    {
+      "from": "https://mumandthecity.pl/fleksitarianizm-w-praktyce-czyli-jak-ograniczyc-spozycie-miesa-gdy-maz-sie-buntuje-przepisy-produkty-wskazowki/",
+      "to": "https://mumandthecity.pl/jak-wzmacniac-wiez-z-dzieckiem/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/zdrowe-przekaski-dla-dziecka-i-nie-tylko/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/zdrowy-obiad/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/przepis-na-ramen/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/kimchi-przepis/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/category/ostatnie-wpisy/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/gotowe-dania/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/category/health/page/2/"
+    },
+    {
+      "from": "https://mumandthecity.pl/category/health/",
+      "to": "https://mumandthecity.pl/category/health/page/13/"
+    },
+    {
+      "from": "https://mumandthecity.pl/tag/przepisy/",
+      "to": "https://mumandthecity.pl/przepis-na-tarte/"
+    },
+    {
+      "from": "https://mumandthecity.pl/tag/przepisy/",
+      "to": "https://mumandthecity.pl/tag/przepisy/page/2/"
+    },
+    {
+      "from": "https://mumandthecity.pl/tag/przepisy/",
+      "to": "https://mumandthecity.pl/tag/przepisy/page/10/"
+    },
+    {
+      "from": "https://mumandthecity.pl/author/ilona/",
+      "to": "https://mumandthecity.pl/idealny-prezent/"
+    },
+    {
+      "from": "https://mumandthecity.pl/author/ilona/",
+      "to": "https://mumandthecity.pl/category/woman/"
+    },
+    {
+      "from": "https://mumandthecity.pl/author/ilona/",
+      "to": "https://mumandthecity.pl/majtki-menstruacyjne/"
+    },
+    {
+      "from": "https://mumandthecity.pl/author/ilona/",
+      "to": "https://mumandthecity.pl/spotykasz-siebie-po-porodzie-i-mozesz-cos-doradzic-co-mowisz-bo-ja-to/"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/p/smaki.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "http://cytryny-jak-maliny.blogspot.com/2013/09/indyk-z-kurczakiem-zapieczone-w-papryce.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/p/kontakt.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/p/blog-page.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/search/label/danie%20obiadowe"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/search/label/kurczak"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/search/label/pikantne"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/search/label/ry%C5%BC"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1378401043784"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1378414926629"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1378424397486"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1379003783463"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html?showComment=1381919650769"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/chrupiace-placki-ziemniaczane-z-cebulka.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/zamiast-przekaski-smakowita-kolacja.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/feeds/2754034577348672444/comments/default"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/10/delikatna-ryzanka-czyli-nieefektowna.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2020/07/szynka-pieczona-w-keczupie-i-coli.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2013/09/kluski-yzka-kadzione-z-maki.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2014/06/kurczak-w-garnku-pieczony-bez-tuszczu.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2014/02/kluski-slaskie-smazone-po-mezowsku.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2022/02/galaretki-z-kolanek-wieprzowych-i-apek.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2016/11/prosty-roso-z-grzybow-opienka-miodowa.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2020/09/indyk-w-cebuli-na-szybki-smaczny-obiad.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2015/09/dietetyczne-mega-roladki-schabowe-dla.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/2014/03/karkowka-pieczona-w-majonezie-i.html"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/search/label/dodatki"
+    },
+    {
+      "from": "https://cytryny-jak-maliny.blogspot.com/2013/09/pomys-na-obiad-z-niczego-czyli-pikantny.html",
+      "to": "https://cytryny-jak-maliny.blogspot.com/search/label/obiad%20dla%20dziecka"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/o-mnie/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/portfolio/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/przepisy/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/wspolpraca-i-kontakt/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/sniadania/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/na-chleb/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/lunche/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/dania-glowne-2/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/slodkosci/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/dodatki/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kontakt/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/moje-wakacyjne-gotowanie/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/artykuly/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/product/roslinny-obiad-jesien-i-zima/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/lifestyle/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/kategoria/zdrowe-odzywianie/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/rozmowa-z-katarzyna-jankowska-mama-alergika-gotuje/"
+    },
+    {
+      "from": "https://ammniam.pl/co-jesc-na-obiad-zamiast-miesa/",
+      "to": "https://ammniam.pl/jak-zmiana-odzywiania-zmienia-zycie-rozmowa-z-magda-wieczorek/"
+    },
+    {
+      "from": "https://ammniam.pl/",
+      "to": "http://ammniam.pl/wspolpraca-i-kontakt/"
+    },
+    {
+      "from": "https://ammniam.pl/",
+      "to": "http://ammniam.pl/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/salatka-ze-szparagami-bulgurem-i-wedzonym-tofu/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/makaron-z-sosem-porowo-groszkowo-smietanowym/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/czekoladowe-medaliony-z-sezamem/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/weganskie-gofry-z-fasoli/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/weganski-ramen-po-mojemu/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/kotlety-mielone-z-tofu/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/weganski-kebeb-z-tofu-z-surowka-z-czerwonej-kapusty/"
+    },
+    {
+      "from": "https://ammniam.pl/kategoria/przepisy/",
+      "to": "https://ammniam.pl/roslinna-uczta-smakow-moja-trzecia-ksiazka/"
+    }
+  ]
+}
