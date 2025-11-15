@@ -1,6 +1,9 @@
 ﻿using Abot2.Crawler;
 using Abot2.Poco;
 using Serilog;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 using WebExplorationProject.Models;
 
 namespace WebExplorationProject.Crawling
@@ -12,6 +15,7 @@ namespace WebExplorationProject.Crawling
         private readonly List<CrawledEdge> _edges = new();
         private string _currentSource = "Unknown";
         private readonly string _dataPath;
+        private const int BatchSize = 50;
 
         public WebCrawlingService(int maxDepth = 3, int maxWidth = 30)
         {
@@ -21,9 +25,10 @@ namespace WebExplorationProject.Crawling
                 MaxCrawlDepth = maxDepth,
                 IsUriRecrawlingEnabled = false,
                 DownloadableContentTypes = "text/html",
-                MaxConcurrentThreads = 5,
+                MaxConcurrentThreads = 10,
                 CrawlTimeoutSeconds = 300,
-                MinCrawlDelayPerDomainMilliSeconds = 1000
+                MinCrawlDelayPerDomainMilliSeconds = 1000,
+                IsRespectRobotsDotTextEnabled = true
             };
 
             _maxWidth = maxWidth;
@@ -67,55 +72,101 @@ namespace WebExplorationProject.Crawling
             }
 
             Log.Information("[{src}] Crawling complete. Total seeds processed: {count}", sourceName, processed);
-            SaveResults(sourceName);
+
+            if (_edges.Any())
+            {
+                SavePartialResults(sourceName);
+            }
+                
             ExportGraphJson(sourceName);
-            ExportGraphviz(sourceName);
+            ExportGraphvizFromCsv(sourceName);
             GeneratePngGraphs(sourceName);
         }
 
         private void PageCrawlCompleted(object sender, PageCrawlCompletedArgs e)
         {
             var page = e.CrawledPage;
-            var html = page.Content.Text ?? "";
-            var wordCount = html.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Length;
+            var doc = page.AngleSharpHtmlDocument;
+
+            var metaDescription = doc?.Head?
+                .QuerySelector("meta[name=description]")?
+                .GetAttribute("content") ?? "";
+
+            doc?.QuerySelectorAll("nav, header, footer, script, style, noscript")
+                .ToList()
+                .ForEach(n => n.Remove());
+
+            var rawText = doc?.Body?.TextContent ?? "";
+            var cleaned = Regex.Replace(rawText, @"\s+", " ").Trim();
+            var wordCount = cleaned.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
 
             _edges.Add(new CrawledEdge(
                 Source: _currentSource,
                 ParentUrl: page.ParentUri?.AbsoluteUri ?? "(root)",
                 Url: page.Uri.AbsoluteUri,
                 Depth: page.CrawlDepth,
-                Title: page.AngleSharpHtmlDocument?.Title ?? "(no title)",
+                Title: doc?.Title ?? "(no title)",
                 StatusCode: (int)(page.HttpResponseMessage?.StatusCode ?? 0),
                 ContentType: page.HttpResponseMessage?.Content?.Headers?.ContentType?.MediaType ?? "unknown",
+                Content: cleaned,
+                Description: metaDescription,
                 LoadTimeSeconds: page.Elapsed,
                 WordCount: wordCount
             ));
 
+            if (_edges.Count % BatchSize == 0)
+            {
+                SavePartialResults(_currentSource);
+                _edges.Clear();
+            }
+
             Log.Information("Crawled: {url} | depth {depth} | from {parent}", page.Uri, page.CrawlDepth, page.ParentUri);
         }
 
-        public void SaveResults(string sourceName)
+        private void SavePartialResults(string sourceName)
         {
             var csvPath = Path.Combine(_dataPath, $"{sourceName}_graph.csv");
-            var xlsxPath = Path.Combine(_dataPath, $"{sourceName}_graph.xlsx");
+            bool fileExists = File.Exists(csvPath);
 
-            using (var writer = new StreamWriter(csvPath))
+            using (var writer = new StreamWriter(csvPath, append: true, new UTF8Encoding(true)))
             {
-                writer.WriteLine("Source,ParentUrl,Url,Depth,Title,StatusCode,ContentType,LoadTimeSeconds,WordCount");
-                foreach (var edge in _edges)
+                if (!fileExists)
                 {
-                    writer.WriteLine($"\"{edge.Source}\",\"{edge.ParentUrl}\",\"{edge.Url}\",{edge.Depth},\"{edge.Title.Replace("\"", "'")}\",{edge.StatusCode},\"{edge.ContentType}\",{edge.LoadTimeSeconds:F2},{edge.WordCount}");
+                    writer.WriteLine("Source,ParentUrl,Url,Depth,Title,StatusCode,ContentType,Content,Description,LoadTimeSeconds,WordCount");
+                }
+
+                foreach (var edge in _edges.Where(e => e.Source == sourceName))
+                {
+                    writer.WriteLine(string.Join(",",
+                        EscapeCsv(edge.Source),
+                        EscapeCsv(edge.ParentUrl),
+                        EscapeCsv(edge.Url),
+                        edge.Depth,
+                        EscapeCsv(edge.Title),
+                        edge.StatusCode,
+                        EscapeCsv(edge.ContentType),
+                        EscapeCsv(edge.Content),
+                        EscapeCsv(edge.Description),
+                        edge.LoadTimeSeconds.ToString("F2", CultureInfo.InvariantCulture),
+                        edge.WordCount));
                 }
             }
 
-            using (var workbook = new ClosedXML.Excel.XLWorkbook())
-            {
-                var ws = workbook.AddWorksheet("GraphData");
-                ws.Cell(1, 1).InsertTable(_edges);
-                workbook.SaveAs(xlsxPath);
-            }
+            Log.Information("[{src}] Partial results appended: {count} entries", sourceName, _edges.Count);
+        }
 
-            Log.Information("[{src}] Results saved to {csv} and {xlsx}", sourceName, csvPath, xlsxPath);
+
+        private static string EscapeCsv(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return "\"\"";
+            
+            if (value.Contains('"') || value.Contains(',') || value.Contains('\n') || value.Contains('\r'))
+            {
+                return "\"" + value.Replace("\"", "\"\"") + "\"";
+            }
+            
+            return "\"" + value + "\"";
         }
 
         public void ExportGraphJson(string sourceName)
@@ -127,35 +178,67 @@ namespace WebExplorationProject.Crawling
             var options = new System.Text.Json.JsonSerializerOptions { WriteIndented = true };
             var json = System.Text.Json.JsonSerializer.Serialize(new { nodes, edges }, options);
             File.WriteAllText(jsonPath, json);
+
             Log.Information("[{src}] JSON graph exported: {path}", sourceName, jsonPath);
         }
 
-        public void ExportGraphviz(string sourceName)
+        public void ExportGraphvizFromCsv(string sourceName)
         {
-            var path = Path.Combine(_dataPath, $"{sourceName}_graph.dot");
-            using var w = new StreamWriter(path);
+            var csvPath = Path.Combine(_dataPath, $"{sourceName}_graph.csv");
+            var dotPath = Path.Combine(_dataPath, $"{sourceName}_graph.dot");
+
+            if (!File.Exists(csvPath))
+            {
+                Log.Warning("[{src}] CSV not found: {path}", sourceName, csvPath);
+                return;
+            }
+
+            var lines = File.ReadAllLines(csvPath, Encoding.UTF8)
+                            .Skip(1)
+                            .Where(line => !string.IsNullOrWhiteSpace(line));
+
+            using var w = new StreamWriter(dotPath, false, new UTF8Encoding(false));
 
             w.WriteLine("digraph CrawlGraph {");
-            w.WriteLine("  rankdir=LR;"); // lewo→prawo zamiast pionowego layoutu
+            w.WriteLine("  rankdir=LR;");
             w.WriteLine("  overlap=false;");
             w.WriteLine("  splines=true;");
             w.WriteLine("  node [shape=box, style=rounded, fontsize=10, color=gray50];");
             w.WriteLine("  edge [color=gray70, arrowsize=0.6];");
 
-            foreach (var e in _edges)
+            foreach (var line in lines)
             {
-                string parent = Shorten(e.ParentUrl, 70);
-                string child = Shorten(e.Url, 70);
-                string color = e.Source.Equals("Google", StringComparison.OrdinalIgnoreCase)
+                var fields = SplitCsvLine(line);
+                if (fields.Length < 3) continue;
+
+                var parent = Shorten(fields[1], 70);
+                var child = Shorten(fields[2], 70);
+                var source = fields[0];
+
+                string color = source.Equals("Google", StringComparison.OrdinalIgnoreCase)
                     ? "deepskyblue3"
                     : "darkorange3";
 
-                w.WriteLine($"  \"{parent}\" -> \"{child}\" [color={color}];");
+                w.WriteLine($"  \"{EscapeDot(parent)}\" -> \"{EscapeDot(child)}\" [color={color}];");
             }
 
             w.WriteLine("}");
-            Log.Information("[{src}] Graph exported: {path}", sourceName, path);
+            Log.Information("[{src}] Graph exported from CSV: {path}", sourceName, dotPath);
         }
+
+        private static string[] SplitCsvLine(string line)
+        {
+            var matches = Regex.Matches(line, "(?<=^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)");
+            return matches.Select(m => m.Value.Trim().Trim('"').Replace("\"\"", "\"")).ToArray();
+        }
+
+        private static string EscapeDot(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return "(null)";
+            return text.Replace("\"", "'").Replace("\\", "\\\\");
+        }
+
 
         private static string Shorten(string text, int maxLen)
         {

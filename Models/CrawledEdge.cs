@@ -8,6 +8,8 @@
         string Title,
         int StatusCode,
         string ContentType,
+        string Content,
+        string Description,
         double LoadTimeSeconds,
         int WordCount
     );

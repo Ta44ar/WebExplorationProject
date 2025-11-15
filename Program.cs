@@ -10,6 +10,7 @@ class Program
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
             .MinimumLevel.Information()
+            //.MinimumLevel.Warning()
             .CreateLogger();
 
         Log.Information("=== Web Exploration Project start ===");
@@ -36,7 +37,7 @@ class Program
             Log.Warning("Missing Brave API token");
         }
 
-        string query = "pomysł na obiad mięsny";
+        string query = "czy szczepionki powodują autyzm";
         bool useCache = true;
 
         var http = new HttpClient();
