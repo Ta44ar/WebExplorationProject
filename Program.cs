@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Serilog;
 using WebExplorationProject.Crawling;
+using WebExplorationProject.Models;
 using WebExplorationProject.Search;
 
 class Program
@@ -9,8 +10,8 @@ class Program
     {
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
-            .MinimumLevel.Information()
-            //.MinimumLevel.Warning()
+            //.MinimumLevel.Information()
+            .MinimumLevel.Warning()
             .CreateLogger();
 
         Log.Information("=== Web Exploration Project start ===");
@@ -24,7 +25,16 @@ class Program
         string? googleApiKey = configuration["GOOGLE_API_KEY"] ?? configuration["Secrets:GoogleApiKey"];
         string? googleCx = configuration["GOOGLE_CX"] ?? configuration["Secrets:GoogleCx"];
         string? braveToken = configuration["BRAVE_API_KEY"] ?? configuration["Secrets:BraveApiKey"];
-        int maxResults = int.Parse(configuration["Search:MaxResults"] ?? "12");
+
+        // Read crawl mode from configuration (default: BFS)
+        string crawlModeStr = configuration["Crawl:Mode"] ?? "BFS";
+        CrawlMode crawlMode = Enum.TryParse<CrawlMode>(crawlModeStr, true, out var mode) 
+            ? mode 
+            : CrawlMode.BFS;
+
+        Log.Information("Crawl mode selected: {mode} ({description})", 
+            crawlMode, 
+            crawlMode == CrawlMode.BFS ? "Breadth-First Search - FIFO queue" : "Depth-First Search - LIFO stack");
 
         if (string.IsNullOrEmpty(googleApiKey) || string.IsNullOrEmpty(googleCx))
         {
@@ -39,40 +49,53 @@ class Program
 
         string query = "czy szczepionki powodują autyzm";
         bool useCache = true;
+        int maxResults = 20;
 
         var http = new HttpClient();
         var googleProvider = new GoogleSearchProvider(http, googleApiKey, googleCx);
-        var braveProvider = !string.IsNullOrEmpty(braveToken)
-            ? new BraveSearchProvider(http, braveToken)
-            : null;
+        var braveProvider = new BraveSearchProvider(http, braveToken);
+        var crawler = new WebCrawlingService(crawlMode: crawlMode);
 
-        var crawler = new WebCrawlingService();
+        bool googleCrawled = false;
+        bool braveCrawled = false;
 
-        Log.Information("\n=== GOOGLE ===");
-        Log.Information("Fetching results from Google for query: '{query}'...", query);
+        var crawledProviders = new HashSet<string>();
 
-        var googleResults = await googleProvider.GetResultsAsync(query, maxResults, useCache);
-        Log.Information("[Google] Retrieved {count} links.", googleResults.Count);
-
-        if (googleResults.Count > 0)
+        async Task CrawlProviderAsync(ISearchProvider provider)
         {
-            Log.Information("[Google] Starting crawling...");
-            await crawler.CrawlUrlsAsync(googleResults, googleProvider.ProviderName);
+            Log.Information("\n=== {Provider} ===", provider.ProviderName.ToUpper());
+            Log.Information("Fetching results from {Provider} for query: '{query}'...", provider.ProviderName, query);
+
+            var results = await provider.GetResultsAsync(query, maxResults, useCache);
+            Log.Information("[{Provider}] Retrieved {count} links.", provider.ProviderName, results.Count);
+
+            if (results.Count > 0)
+            {
+                Log.Information("[{Provider}] Starting crawling...", provider.ProviderName);
+                await crawler.CrawlUrlsAsync(results, provider.ProviderName);
+                crawledProviders.Add(provider.ProviderName);
+            }
         }
 
-        if (braveProvider != null)
+        ISearchProvider[] providers = [googleProvider, braveProvider];
+
+        foreach (var provider in providers)
         {
-            Log.Information("\n=== BRAVE ===");
-            Log.Information("Fetching results from Brave for query: '{query}'...", query);
+            await CrawlProviderAsync(provider);
+        }
 
-            var braveResults = await braveProvider.GetResultsAsync(query, maxResults, useCache);
-            Log.Information("[Brave] Retrieved {count} links.", braveResults.Count);
-
-            if (braveResults.Count > 0)
-            {
-                Log.Information("[Brave] Starting crawling...");
-                await crawler.CrawlUrlsAsync(braveResults, braveProvider.ProviderName);
-            }
+        // Generate comparison artifacts if both sources were crawled
+        if (googleCrawled && braveCrawled)
+        {
+            Log.Information("\n=== COMPARISON ===");
+            Log.Information("Generating comparison artifacts...");
+            crawler.ExportComparisonArtifacts(googleProvider.ProviderName, "Brave");
+            Log.Information("Comparison complete. Check data folder for Compare_Google_Brave_* files.");
+        }
+        else
+        {
+            Log.Warning("Skipping comparison - not all sources were crawled (Google: {g}, Brave: {b})", 
+                googleCrawled, braveCrawled);
         }
 
         Log.Information("\nProgram execution completed.");
