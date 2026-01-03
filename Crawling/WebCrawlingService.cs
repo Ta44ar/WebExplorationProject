@@ -92,7 +92,7 @@ namespace WebExplorationProject.Crawling
             GeneratePngGraphs(sourceName);
         }
 
-        private void PageCrawlCompleted(object sender, PageCrawlCompletedArgs e)
+        private void PageCrawlCompleted(object? sender, PageCrawlCompletedArgs e)
         {
             var page = e.CrawledPage;
             var doc = page.AngleSharpHtmlDocument;

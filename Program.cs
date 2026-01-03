@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Serilog;
-using WebExplorationProject.Crawling;
-using WebExplorationProject.Models;
-using WebExplorationProject.Search;
+using WebExplorationProject.Tasks;
 
 class Program
 {
@@ -10,94 +8,85 @@ class Program
     {
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
-            //.MinimumLevel.Information()
-            .MinimumLevel.Warning()
+            .MinimumLevel.Information()
             .CreateLogger();
 
-        Log.Information("=== Web Exploration Project start ===");
+        Log.Information("=== Web Exploration Project ===");
+        Log.Information("Analyzing web content credibility\n");
 
         var builder = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddUserSecrets<Program>(optional: true);
 
         var configuration = builder.Build();
+        var httpClient = new HttpClient();
 
-        string? googleApiKey = configuration["GOOGLE_API_KEY"] ?? configuration["Secrets:GoogleApiKey"];
-        string? googleCx = configuration["GOOGLE_CX"] ?? configuration["Secrets:GoogleCx"];
-        string? braveToken = configuration["BRAVE_API_KEY"] ?? configuration["Secrets:BraveApiKey"];
-
-        // Read crawl mode from configuration (default: BFS)
-        string crawlModeStr = configuration["Crawl:Mode"] ?? "BFS";
-        CrawlMode crawlMode = Enum.TryParse<CrawlMode>(crawlModeStr, true, out var mode) 
-            ? mode 
-            : CrawlMode.BFS;
-
-        Log.Information("Crawl mode selected: {mode} ({description})", 
-            crawlMode, 
-            crawlMode == CrawlMode.BFS ? "Breadth-First Search - FIFO queue" : "Depth-First Search - LIFO stack");
-
-        if (string.IsNullOrEmpty(googleApiKey) || string.IsNullOrEmpty(googleCx))
+        // Available tasks
+        var tasks = new Dictionary<int, ITask>
         {
-            Log.Error("Missing required environment variables: GOOGLE_API_KEY/GOOGLE_CX");
-            return;
-        }
+            { 1, new CrawlingTask(configuration, httpClient) },
+            { 2, new RankingTask(configuration, httpClient) }
+        };
 
-        if (string.IsNullOrEmpty(braveToken))
+        // Parse command line arguments or show menu
+        int selectedTask = 0;
+
+        if (args.Length > 0 && int.TryParse(args[0], out var taskArg) && tasks.ContainsKey(taskArg))
         {
-            Log.Warning("Missing Brave API token");
-        }
-
-        string query = "czy szczepionki powodują autyzm";
-        bool useCache = true;
-        int maxResults = 20;
-
-        var http = new HttpClient();
-        var googleProvider = new GoogleSearchProvider(http, googleApiKey, googleCx);
-        var braveProvider = new BraveSearchProvider(http, braveToken);
-        var crawler = new WebCrawlingService(crawlMode: crawlMode);
-
-        bool googleCrawled = false;
-        bool braveCrawled = false;
-
-        var crawledProviders = new HashSet<string>();
-
-        async Task CrawlProviderAsync(ISearchProvider provider)
-        {
-            Log.Information("\n=== {Provider} ===", provider.ProviderName.ToUpper());
-            Log.Information("Fetching results from {Provider} for query: '{query}'...", provider.ProviderName, query);
-
-            var results = await provider.GetResultsAsync(query, maxResults, useCache);
-            Log.Information("[{Provider}] Retrieved {count} links.", provider.ProviderName, results.Count);
-
-            if (results.Count > 0)
-            {
-                Log.Information("[{Provider}] Starting crawling...", provider.ProviderName);
-                await crawler.CrawlUrlsAsync(results, provider.ProviderName);
-                crawledProviders.Add(provider.ProviderName);
-            }
-        }
-
-        ISearchProvider[] providers = [googleProvider, braveProvider];
-
-        foreach (var provider in providers)
-        {
-            await CrawlProviderAsync(provider);
-        }
-
-        // Generate comparison artifacts if both sources were crawled
-        if (googleCrawled && braveCrawled)
-        {
-            Log.Information("\n=== COMPARISON ===");
-            Log.Information("Generating comparison artifacts...");
-            crawler.ExportComparisonArtifacts(googleProvider.ProviderName, "Brave");
-            Log.Information("Comparison complete. Check data folder for Compare_Google_Brave_* files.");
+            selectedTask = taskArg;
         }
         else
         {
-            Log.Warning("Skipping comparison - not all sources were crawled (Google: {g}, Brave: {b})", 
-                googleCrawled, braveCrawled);
+            selectedTask = ShowTaskMenu(tasks);
         }
 
-        Log.Information("\nProgram execution completed.");
+        if (selectedTask == 0)
+        {
+            Log.Information("Exiting...");
+            return;
+        }
+
+        if (tasks.TryGetValue(selectedTask, out var task))
+        {
+            try
+            {
+                await task.ExecuteAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Task execution failed: {message}", ex.Message);
+            }
+        }
+
+        Log.Information("\nProgram completed. Press any key to exit...");
+        if (!Console.IsInputRedirected)
+        {
+            Console.ReadKey();
+        }
+    }
+
+    static int ShowTaskMenu(Dictionary<int, ITask> tasks)
+    {
+        Console.WriteLine("╔════════════════════════════════════════════════════════════╗");
+        Console.WriteLine("║                    SELECT A TASK                           ║");
+        Console.WriteLine("╠════════════════════════════════════════════════════════════╣");
+        
+        foreach (var kvp in tasks)
+        {
+            Console.WriteLine($"║  [{kvp.Key}] {kvp.Value.Name,-50} ║");
+            Console.WriteLine($"║      {kvp.Value.Description,-53} ║");
+            Console.WriteLine("║                                                            ║");
+        }
+        
+        Console.WriteLine("║  [0] Exit                                                  ║");
+        Console.WriteLine("╚════════════════════════════════════════════════════════════╝");
+        Console.Write("\nEnter your choice: ");
+
+        if (int.TryParse(Console.ReadLine(), out var choice))
+        {
+            return choice;
+        }
+
+        return 0;
     }
 }
