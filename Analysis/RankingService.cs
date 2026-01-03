@@ -16,7 +16,7 @@ namespace WebExplorationProject.Analysis
     /// - PositionScore: Based on search result position (1st = 1.0, last = 0.0)
     /// - ReferenceScore: Based on outbound links to relevant domains
     /// - SpecialistScore: Based on density of domain-specific terminology
-    /// - CredibilityScore: Based on absence of emotional/propaganda language (AI-assisted)
+    /// - CredibilityScore: Based on absence of emotional/propaganda language
     /// 
     /// Default weights: w1=0.20, w2=0.25, w3=0.30, w4=0.25
     /// </summary>
@@ -24,26 +24,42 @@ namespace WebExplorationProject.Analysis
     {
         private readonly string _dataPath;
         private readonly RankingConfiguration _config;
-        private readonly IAiAnalyzer? _aiAnalyzer;
-        private readonly Dictionary<string, HashSet<string>> _domainSpecialistTerms;
+        private readonly HashSet<string> _specialistTerms;
         private readonly HashSet<string> _emotionalWords;
         private readonly HashSet<string> _propagandaPhrases;
+        private readonly bool _usingGeneratedDictionaries;
 
         public RankingService(
             string dataPath, 
             RankingConfiguration? config = null,
-            IAiAnalyzer? aiAnalyzer = null)
+            GeneratedDictionaries? generatedDictionaries = null)
         {
             _dataPath = dataPath;
             _config = config ?? new RankingConfiguration();
-            _aiAnalyzer = aiAnalyzer;
             
             Directory.CreateDirectory(_dataPath);
 
-            // Initialize term dictionaries
-            _domainSpecialistTerms = InitializeSpecialistTerms();
-            _emotionalWords = InitializeEmotionalWords();
-            _propagandaPhrases = InitializePropagandaPhrases();
+            // Use generated dictionaries if available, otherwise use defaults
+            if (generatedDictionaries != null && generatedDictionaries.SpecialistTerms.Count > 0)
+            {
+                _specialistTerms = generatedDictionaries.SpecialistTerms;
+                _emotionalWords = generatedDictionaries.EmotionalWords;
+                _propagandaPhrases = generatedDictionaries.PropagandaPhrases;
+                _usingGeneratedDictionaries = true;
+                
+                Log.Information("Using AI-generated dictionaries: {specialist} specialist, {emotional} emotional, {propaganda} propaganda",
+                    _specialistTerms.Count, _emotionalWords.Count, _propagandaPhrases.Count);
+            }
+            else
+            {
+                // Initialize default term dictionaries
+                _specialistTerms = InitializeDefaultSpecialistTerms();
+                _emotionalWords = InitializeDefaultEmotionalWords();
+                _propagandaPhrases = InitializeDefaultPropagandaPhrases();
+                _usingGeneratedDictionaries = false;
+                
+                Log.Information("Using default dictionaries (no AI generation)");
+            }
 
             if (!_config.ValidateWeights())
             {
@@ -80,45 +96,34 @@ namespace WebExplorationProject.Analysis
             int totalPages = lines.Count;
 
             Log.Information("[{src}] Analyzing {count} pages for ranking", sourceName, totalPages);
-            
-            if (_config.UseAiAnalysis && _aiAnalyzer != null)
-            {
-                Log.Information("[{src}] AI analysis enabled for first {max} pages (delay: {delay}ms)", 
-                    sourceName, _config.MaxPagesForAiAnalysis, _config.AiRequestDelayMs);
-            }
 
             // Build link graph for reference analysis
             var linkGraph = BuildLinkGraph(lines);
 
             var rankings = new List<PageRanking>();
             int position = 0;
-            int aiAnalyzedCount = 0;
 
             foreach (var line in lines)
             {
                 position++;
                 
-                // Only use AI for first N pages to avoid rate limiting and control costs
-                bool useAiForThisPage = _config.UseAiAnalysis 
-                    && _aiAnalyzer != null 
-                    && aiAnalyzedCount < _config.MaxPagesForAiAnalysis;
-                
-                var ranking = await AnalyzePageAsync(line, position, totalPages, linkGraph, sourceName, searchQuery, useAiForThisPage);
+                var ranking = AnalyzePage(
+                    line, 
+                    position, 
+                    totalPages, 
+                    linkGraph, 
+                    sourceName);
                 
                 if (!string.IsNullOrEmpty(ranking.Url))
                 {
                     rankings.Add(ranking);
-                    if (useAiForThisPage && !string.IsNullOrEmpty(ranking.Notes))
-                    {
-                        aiAnalyzedCount++;
-                    }
                 }
 
                 // Progress logging
-                if (position % 10 == 0)
+                if (position % 100 == 0)
                 {
-                    Log.Information("[{src}] Analyzed {pos}/{total} pages (AI: {ai})", 
-                        sourceName, position, totalPages, aiAnalyzedCount);
+                    Log.Information("[{src}] Analyzed {pos}/{total} pages", 
+                        sourceName, position, totalPages);
                 }
             }
 
@@ -139,23 +144,21 @@ namespace WebExplorationProject.Analysis
             SaveRankingToCsv(sortedRankings, sourceName);
             SaveRankingDetails(sortedRankings, sourceName);
 
-            Log.Information("[{src}] Ranking complete. AI analyzed: {ai} pages. Top 5:", sourceName, aiAnalyzedCount);
+            Log.Information("[{src}] Ranking complete. Top 5:", sourceName);
             foreach (var r in sortedRankings.Take(5))
             {
                 Log.Information("  #{rank}: {url} (Score: {score:F3})", r.FinalRank, Shorten(r.Url, 60), r.TotalScore);
             }
 
-            return sortedRankings;
+            return await Task.FromResult(sortedRankings);
         }
 
-        private async Task<PageRanking> AnalyzePageAsync(
+        private PageRanking AnalyzePage(
             string csvLine, 
             int position, 
             int totalPages,
             Dictionary<string, HashSet<string>> linkGraph,
-            string sourceName,
-            string? searchQuery,
-            bool useAi = true)
+            string sourceName)
         {
             var fields = SplitCsvLine(csvLine);
             if (fields.Length < 8)
@@ -164,7 +167,6 @@ namespace WebExplorationProject.Analysis
             string url = fields[2];
             string title = fields[4];
             string content = fields[7];
-            string description = fields.Length > 8 ? fields[8] : "";
 
             var ranking = new PageRanking
             {
@@ -179,13 +181,13 @@ namespace WebExplorationProject.Analysis
             ranking.PositionScore = CalculatePositionScore(position, totalPages);
 
             // === Criterion 2: External References ===
-            AnalyzeReferences(ranking, url, content, linkGraph);
+            AnalyzeReferences(ranking, url, linkGraph);
 
             // === Criterion 3: Specialist Terminology ===
-            AnalyzeSpecialistContent(ranking, content, searchQuery);
+            AnalyzeSpecialistContent(ranking, content);
 
             // === Criterion 4: Emotional/Propaganda Analysis ===
-            await AnalyzeEmotionalContentAsync(ranking, content, searchQuery, useAi);
+            AnalyzeEmotionalContent(ranking, content);
 
             return ranking;
         }
@@ -193,8 +195,6 @@ namespace WebExplorationProject.Analysis
         /// <summary>
         /// Criterion 1: Position Score
         /// Formula: (N - position + 1) / N
-        /// Where N = total number of pages
-        /// Result: 1.0 for position 1, decreasing linearly to ~0 for last position
         /// </summary>
         private double CalculatePositionScore(int position, int totalPages)
         {
@@ -204,12 +204,9 @@ namespace WebExplorationProject.Analysis
 
         /// <summary>
         /// Criterion 2: Reference Analysis
-        /// Analyzes outbound links to other domains on the topic.
-        /// Higher score for more diverse, relevant external references.
         /// </summary>
-        private void AnalyzeReferences(PageRanking ranking, string url, string content, Dictionary<string, HashSet<string>> linkGraph)
+        private void AnalyzeReferences(PageRanking ranking, string url, Dictionary<string, HashSet<string>> linkGraph)
         {
-            // Get outbound links from this page
             if (linkGraph.TryGetValue(url, out var outboundLinks))
             {
                 ranking.OutboundLinkCount = outboundLinks.Count;
@@ -220,20 +217,16 @@ namespace WebExplorationProject.Analysis
                     .Count();
             }
 
-            // Normalize scores
             double linkScore = Math.Min(1.0, (double)ranking.OutboundLinkCount / _config.MaxExpectedOutboundLinks);
             double domainScore = Math.Min(1.0, (double)ranking.UniqueDomainsReferenced / _config.MaxExpectedUniqueDomains);
             
-            // Combined reference score (weighted average)
             ranking.ReferenceScore = 0.4 * linkScore + 0.6 * domainScore;
         }
 
         /// <summary>
         /// Criterion 3: Specialist Terminology Analysis
-        /// Counts domain-specific terms and calculates density.
-        /// Higher density of specialist terms = higher score.
         /// </summary>
-        private void AnalyzeSpecialistContent(PageRanking ranking, string content, string? searchQuery)
+        private void AnalyzeSpecialistContent(PageRanking ranking, string content)
         {
             if (string.IsNullOrWhiteSpace(content))
             {
@@ -245,11 +238,8 @@ namespace WebExplorationProject.Analysis
             var words = Regex.Matches(contentLower, @"\b\w+\b");
             ranking.TotalWordCount = words.Count;
 
-            // Get relevant specialist terms based on query/topic
-            var relevantTerms = GetRelevantSpecialistTerms(searchQuery);
-            
             int specialistCount = 0;
-            foreach (var term in relevantTerms)
+            foreach (var term in _specialistTerms)
             {
                 var pattern = @"\b" + Regex.Escape(term.ToLowerInvariant()) + @"\b";
                 specialistCount += Regex.Matches(contentLower, pattern).Count;
@@ -260,75 +250,33 @@ namespace WebExplorationProject.Analysis
                 ? (double)specialistCount / ranking.TotalWordCount 
                 : 0;
 
-            // Score based on target density (sigmoid-like curve)
             double densityRatio = ranking.SpecialistTermDensity / _config.TargetSpecialistDensity;
             ranking.SpecialistScore = Math.Min(1.0, densityRatio);
         }
 
         /// <summary>
-        /// Criterion 4: Emotional/Propaganda Analysis
-        /// Uses both rule-based detection and AI analysis.
-        /// Lower emotional manipulation = higher credibility score.
+        /// Criterion 4: Emotional/Propaganda Analysis (rule-based only)
         /// </summary>
-        private async Task AnalyzeEmotionalContentAsync(PageRanking ranking, string content, string? searchQuery, bool useAi = true)
+        private void AnalyzeEmotionalContent(PageRanking ranking, string content)
         {
             if (string.IsNullOrWhiteSpace(content))
             {
-                ranking.EmotionScore = 0.5; // Neutral default
+                ranking.EmotionScore = 0.5;
                 ranking.CredibilityScore = 0.5;
                 return;
             }
 
             var contentLower = content.ToLowerInvariant();
 
-            // Rule-based emotional word detection
+            // Count emotional words
             ranking.EmotionalWordCount = _emotionalWords
-                .Sum(word => Regex.Matches(contentLower, @"\b" + Regex.Escape(word) + @"\b").Count);
+                .Sum(word => Regex.Matches(contentLower, @"\b" + Regex.Escape(word.ToLowerInvariant()) + @"\b").Count);
 
-            // Rule-based propaganda phrase detection
+            // Count propaganda phrases
             ranking.PropagandaPhraseCount = _propagandaPhrases
-                .Sum(phrase => Regex.Matches(contentLower, Regex.Escape(phrase)).Count);
+                .Sum(phrase => Regex.Matches(contentLower, Regex.Escape(phrase.ToLowerInvariant())).Count);
 
-            // AI-based analysis (if enabled and available)
-            if (useAi && _aiAnalyzer != null)
-            {
-                var aiResult = await _aiAnalyzer.AnalyzeContentAsync(
-                    content.Length > _config.MaxContentForAi 
-                        ? content.Substring(0, _config.MaxContentForAi) 
-                        : content,
-                    searchQuery);
-
-                if (aiResult.Success)
-                {
-                    ranking.SentimentScore = aiResult.SentimentScore;
-                    ranking.CredibilityScore = aiResult.CredibilityScore;
-                    ranking.EmotionalWordCount += aiResult.EmotionalWords.Count;
-                    ranking.PropagandaPhraseCount += aiResult.DetectedTechniques.Count;
-                    ranking.Notes = aiResult.Explanation;
-                }
-                else
-                {
-                    // Fallback to rule-based scoring
-                    CalculateRuleBasedEmotionScore(ranking);
-                }
-            }
-            else
-            {
-                // Pure rule-based scoring
-                CalculateRuleBasedEmotionScore(ranking);
-            }
-
-            // EmotionScore: higher = more emotional/propaganda (bad)
-            // We invert this for final score calculation
-            double emotionalDensity = ranking.TotalWordCount > 0 
-                ? (double)(ranking.EmotionalWordCount + ranking.PropagandaPhraseCount * 2) / ranking.TotalWordCount
-                : 0;
-            ranking.EmotionScore = Math.Min(1.0, emotionalDensity / _config.EmotionalDensityThreshold);
-        }
-
-        private void CalculateRuleBasedEmotionScore(PageRanking ranking)
-        {
-            // Estimate credibility based on rule-based metrics
+            // Calculate credibility score
             double emotionalRatio = ranking.TotalWordCount > 0 
                 ? (double)ranking.EmotionalWordCount / ranking.TotalWordCount 
                 : 0;
@@ -336,15 +284,17 @@ namespace WebExplorationProject.Analysis
                 ? (double)ranking.PropagandaPhraseCount * 5 / ranking.TotalWordCount 
                 : 0;
 
-            // Higher emotional/propaganda = lower credibility
             ranking.CredibilityScore = Math.Max(0, 1.0 - emotionalRatio * 20 - propagandaRatio * 10);
-            ranking.SentimentScore = 0; // Unknown without AI
+
+            // EmotionScore: higher = more emotional (bad)
+            double emotionalDensity = ranking.TotalWordCount > 0 
+                ? (double)(ranking.EmotionalWordCount + ranking.PropagandaPhraseCount * 2) / ranking.TotalWordCount
+                : 0;
+            ranking.EmotionScore = Math.Min(1.0, emotionalDensity / _config.EmotionalDensityThreshold);
         }
 
         /// <summary>
         /// Calculates the final weighted score.
-        /// Formula: w1*Position + w2*Reference + w3*Specialist + w4*Credibility
-        /// Note: We use CredibilityScore (not EmotionScore) because higher credibility = better
         /// </summary>
         private double CalculateTotalScore(PageRanking ranking)
         {
@@ -360,7 +310,6 @@ namespace WebExplorationProject.Analysis
 
             using var writer = new StreamWriter(outputPath, false, new UTF8Encoding(true));
             
-            // Header
             writer.WriteLine("FinalRank,Url,Title,TotalScore,PositionScore,ReferenceScore,SpecialistScore,CredibilityScore,EmotionScore,SearchPosition,OutboundLinks,SpecialistTerms,EmotionalWords,PropagandaPhrases,Notes");
 
             foreach (var r in rankings)
@@ -394,6 +343,7 @@ namespace WebExplorationProject.Analysis
             sb.AppendLine($"=== RANKING REPORT: {sourceName} ===");
             sb.AppendLine($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine($"Total pages analyzed: {rankings.Count}");
+            sb.AppendLine($"Dictionary source: {(_usingGeneratedDictionaries ? "AI-generated" : "Default")}");
             sb.AppendLine();
             sb.AppendLine("=== FORMULA ===");
             sb.AppendLine("TotalScore = w1*PositionScore + w2*ReferenceScore + w3*SpecialistScore + w4*CredibilityScore");
@@ -415,10 +365,6 @@ namespace WebExplorationProject.Analysis
                 sb.AppendLine($"  Reference Score: {r.ReferenceScore:F4} (links: {r.OutboundLinkCount}, domains: {r.UniqueDomainsReferenced})");
                 sb.AppendLine($"  Specialist Score: {r.SpecialistScore:F4} (terms: {r.SpecialistTermCount}, density: {r.SpecialistTermDensity:P2})");
                 sb.AppendLine($"  Credibility Score: {r.CredibilityScore:F4} (emotional: {r.EmotionalWordCount}, propaganda: {r.PropagandaPhraseCount})");
-                if (!string.IsNullOrEmpty(r.Notes))
-                {
-                    sb.AppendLine($"  AI Notes: {r.Notes}");
-                }
             }
 
             File.WriteAllText(detailsPath, sb.ToString(), Encoding.UTF8);
@@ -455,104 +401,62 @@ namespace WebExplorationProject.Analysis
             return null;
         }
 
-        private HashSet<string> GetRelevantSpecialistTerms(string? searchQuery)
-        {
-            var terms = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-            // Add general medical/scientific terms
-            if (_domainSpecialistTerms.TryGetValue("medical", out var medicalTerms))
-                terms.UnionWith(medicalTerms);
-
-            // Add topic-specific terms based on query
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                var queryLower = searchQuery.ToLowerInvariant();
-                
-                if (queryLower.Contains("szczepion") || queryLower.Contains("vaccine"))
-                {
-                    if (_domainSpecialistTerms.TryGetValue("vaccines", out var vaccineTerms))
-                        terms.UnionWith(vaccineTerms);
-                }
-                
-                if (queryLower.Contains("autyz") || queryLower.Contains("autism"))
-                {
-                    if (_domainSpecialistTerms.TryGetValue("autism", out var autismTerms))
-                        terms.UnionWith(autismTerms);
-                }
-            }
-
-            return terms;
-        }
-
-        private Dictionary<string, HashSet<string>> InitializeSpecialistTerms()
-        {
-            return new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase)
-            {
-                ["medical"] = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    "badanie kliniczne", "peer-review", "metaanaliza", "randomizacja",
-                    "grupa kontrolna", "placebo", "skuteczność", "bezpieczeństwo",
-                    "epidemiologia", "immunologia", "patogen", "antygen", "przeciwciało",
-                    "efekt uboczny", "działanie niepożądane", "korelacja", "przyczynowość",
-                    "statystycznie istotny", "próba", "populacja", "badanie kohortowe"
-                },
-                ["vaccines"] = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    "szczepionka", "immunizacja", "odporność", "antygen", "adiuwant",
-                    "mRNA", "wektor wirusowy", "odpowiedź immunologiczna", "tiomersal",
-                    "aluminium", "skuteczność szczepionki", "NOP", "VAERS", "kalendarz szczepień",
-                    "odporność zbiorowiskowa", "szczepienia ochronne", "dawka przypominająca"
-                },
-                ["autism"] = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    "autyzm", "spektrum autyzmu", "ASD", "zaburzenie rozwojowe",
-                    "diagnoza", "terapia behawioralna", "neurologia", "genetyka",
-                    "rozwój dziecka", "neuroróżnorodność", "Asperger"
-                }
-            };
-        }
-
-        private HashSet<string> InitializeEmotionalWords()
+        private HashSet<string> InitializeDefaultSpecialistTerms()
         {
             return new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
-                // Polish emotional words
+                // General scientific terms
+                "badanie kliniczne", "peer-review", "metaanaliza", "randomizacja",
+                "grupa kontrolna", "placebo", "skuteczność", "bezpieczeństwo",
+                "epidemiologia", "immunologia", "patogen", "antygen", "przeciwciało",
+                "efekt uboczny", "działanie niepożądane", "korelacja", "przyczynowość",
+                "statystycznie istotny", "próba", "populacja", "badanie kohortowe",
+                // Vaccine terms
+                "szczepionka", "immunizacja", "odporność", "adiuwant",
+                "mRNA", "wektor wirusowy", "odpowiedź immunologiczna", "tiomersal",
+                "aluminium", "skuteczność szczepionki", "NOP", "VAERS", "kalendarz szczepień",
+                "odporność zbiorowiskowa", "szczepienia ochronne", "dawka przypominająca",
+                // Autism terms
+                "autyzm", "spektrum autyzmu", "ASD", "zaburzenie rozwojowe",
+                "diagnoza", "terapia behawioralna", "neurologia", "genetyka",
+                "rozwój dziecka", "neuroróżnorodność", "Asperger",
+                // English equivalents
+                "clinical trial", "peer-review", "meta-analysis", "randomization",
+                "control group", "placebo", "efficacy", "safety", "epidemiology"
+            };
+        }
+
+        private HashSet<string> InitializeDefaultEmotionalWords()
+        {
+            return new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
                 "szokujący", "przerażający", "niesamowity", "niewiarygodny",
                 "skandal", "afera", "tragedia", "katastrofa", "zbrodnia",
                 "oszustwo", "kłamstwo", "spisek", "ukrywają", "cenzura",
                 "prawda", "ujawniono", "sekret", "rewelacje", "bomba",
                 "dramat", "horror", "masakra", "apokalipsa",
-                
-                // English emotional words
                 "shocking", "unbelievable", "incredible", "amazing",
                 "scandal", "conspiracy", "cover-up", "hidden", "secret",
-                "truth", "revealed", "exposed", "bombshell"
+                "truth", "revealed", "exposed", "bombshell", "outrageous"
             };
         }
 
-        private HashSet<string> InitializePropagandaPhrases()
+        private HashSet<string> InitializeDefaultPropagandaPhrases()
         {
             return new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
-                // Appeal to fear
                 "twoje dziecko", "ryzykujesz życie", "nie daj się oszukać",
                 "przemysł farmaceutyczny", "big pharma", "rząd ukrywa",
-                
-                // False authority
                 "naukowcy twierdzą", "badania wykazały", "eksperci mówią",
                 "według badań", "udowodniono że",
-                
-                // Bandwagon
                 "wszyscy wiedzą", "każdy wie", "oczywiste jest",
                 "nikt nie wierzy", "miliony ludzi",
-                
-                // Conspiracy
                 "ukryta prawda", "nie chcą żebyś wiedział", "mainstream media",
                 "alternatywna medycyna", "naturalne metody",
-                
-                // Sensationalism
                 "musisz to zobaczyć", "nie uwierzysz", "szok",
-                "pilne", "breaking", "ekskluzywne"
+                "pilne", "breaking", "ekskluzywne",
+                "they don't want you to know", "hidden truth", "wake up",
+                "do your own research", "mainstream media lies"
             };
         }
 

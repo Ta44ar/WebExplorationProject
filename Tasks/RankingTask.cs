@@ -11,7 +11,7 @@ namespace WebExplorationProject.Tasks
     /// - Search position
     /// - External references
     /// - Specialist terminology
-    /// - Emotional/propaganda content (AI-assisted)
+    /// - Emotional/propaganda content
     /// </summary>
     public class RankingTask : ITask
     {
@@ -47,17 +47,17 @@ namespace WebExplorationProject.Tasks
             var config = LoadRankingConfiguration();
             LogConfiguration(config);
 
-            // Setup AI analyzer if configured
-            IAiAnalyzer? aiAnalyzer = null;
-            if (config.UseAiAnalysis)
-            {
-                aiAnalyzer = SetupAiAnalyzer();
-            }
-
-            var rankingService = new RankingService(dataPath, config, aiAnalyzer);
-
             // Get search query for context
             string searchQuery = _configuration["Search:Query"] ?? "czy szczepionki powoduj¹ autyzm";
+
+            // Generate topic-specific dictionaries using AI (if available)
+            GeneratedDictionaries? generatedDictionaries = null;
+            if (ShouldGenerateDictionaries())
+            {
+                generatedDictionaries = await GenerateDictionariesAsync(searchQuery);
+            }
+
+            var rankingService = new RankingService(dataPath, config, generatedDictionaries);
 
             // Find available crawl results
             var sources = FindAvailableSources(dataPath);
@@ -85,13 +85,100 @@ namespace WebExplorationProject.Tasks
             if (allRankings.Count > 1)
             {
                 Log.Information("\n=== Generating Combined Ranking ===");
-                GenerateCombinedRanking(allRankings, dataPath, config);
+                GenerateCombinedRanking(allRankings, dataPath);
             }
 
             Log.Information("\nTask 2 completed. Check 'data' folder for ranking results.");
             Log.Information("Files generated:");
-            Log.Information("  - {source}_ranking.csv - Ranking scores");
-            Log.Information("  - {source}_ranking_details.txt - Detailed report");
+            Log.Information("  - {{source}}_ranking.csv - Ranking scores");
+            Log.Information("  - {{source}}_ranking_details.txt - Detailed report");
+            if (generatedDictionaries != null)
+            {
+                Log.Information("  - generated_dictionaries.txt - AI-generated dictionaries");
+            }
+        }
+
+        private bool ShouldGenerateDictionaries()
+        {
+            // Check if dictionary generation is enabled
+            if (bool.TryParse(_configuration["Ranking:GenerateDictionaries"], out var generate))
+            {
+                if (!generate) return false;
+            }
+            
+            // Check if API key is available
+            var apiKey = _configuration["OPENAI_API_KEY"] ?? _configuration["Secrets:OpenAiApiKey"];
+            return !string.IsNullOrEmpty(apiKey);
+        }
+
+        private async Task<GeneratedDictionaries?> GenerateDictionariesAsync(string searchQuery)
+        {
+            var apiKey = _configuration["OPENAI_API_KEY"] ?? _configuration["Secrets:OpenAiApiKey"];
+            
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                Log.Information("No OpenAI API key - using default dictionaries");
+                return null;
+            }
+
+            var model = _configuration["Ranking:AiModel"] ?? "gpt-4o-mini";
+            var generator = new DictionaryGeneratorService(_httpClient, apiKey, model);
+            
+            Log.Information("Generating topic-specific dictionaries for: \"{query}\"", searchQuery);
+            
+            try
+            {
+                var dictionaries = await generator.GenerateDictionariesAsync(searchQuery);
+                
+                if (dictionaries != null)
+                {
+                    SaveGeneratedDictionaries(dictionaries, searchQuery);
+                }
+                
+                return dictionaries;
+            }
+            catch (Exception ex)
+            {
+                Log.Warning("Failed to generate dictionaries: {error}. Using defaults.", ex.Message);
+                return null;
+            }
+        }
+
+        private void SaveGeneratedDictionaries(GeneratedDictionaries dictionaries, string query)
+        {
+            var projectDir = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent?.FullName
+                ?? AppContext.BaseDirectory;
+            var dataPath = Path.Combine(projectDir, "data");
+            var filePath = Path.Combine(dataPath, "generated_dictionaries.txt");
+
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"=== GENERATED DICTIONARIES ===");
+            sb.AppendLine($"Query: {query}");
+            sb.AppendLine($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine();
+            
+            sb.AppendLine($"=== SPECIALIST TERMS ({dictionaries.SpecialistTerms.Count}) ===");
+            foreach (var term in dictionaries.SpecialistTerms.OrderBy(t => t))
+            {
+                sb.AppendLine($"  - {term}");
+            }
+            sb.AppendLine();
+            
+            sb.AppendLine($"=== EMOTIONAL WORDS ({dictionaries.EmotionalWords.Count}) ===");
+            foreach (var word in dictionaries.EmotionalWords.OrderBy(w => w))
+            {
+                sb.AppendLine($"  - {word}");
+            }
+            sb.AppendLine();
+            
+            sb.AppendLine($"=== PROPAGANDA PHRASES ({dictionaries.PropagandaPhrases.Count}) ===");
+            foreach (var phrase in dictionaries.PropagandaPhrases.OrderBy(p => p))
+            {
+                sb.AppendLine($"  - {phrase}");
+            }
+
+            File.WriteAllText(filePath, sb.ToString(), System.Text.Encoding.UTF8);
+            Log.Information("Generated dictionaries saved: {path}", filePath);
         }
 
         private RankingConfiguration LoadRankingConfiguration()
@@ -108,11 +195,6 @@ namespace WebExplorationProject.Tasks
             if (double.TryParse(_configuration["Ranking:EmotionWeight"], out var emoWeight))
                 config.EmotionWeight = emoWeight;
 
-            // AI settings
-            if (bool.TryParse(_configuration["Ranking:UseAiAnalysis"], out var useAi))
-                config.UseAiAnalysis = useAi;
-            config.AiProvider = _configuration["Ranking:AiProvider"] ?? "OpenAI";
-
             return config;
         }
 
@@ -121,37 +203,11 @@ namespace WebExplorationProject.Tasks
             Log.Information("Ranking Configuration:");
             Log.Information("  Weights: Position={pos:F2}, Reference={ref:F2}, Specialist={spec:F2}, Emotion={emo:F2}",
                 config.PositionWeight, config.ReferenceWeight, config.SpecialistWeight, config.EmotionWeight);
-            Log.Information("  AI Analysis: {enabled} (Provider: {provider})", 
-                config.UseAiAnalysis ? "Enabled" : "Disabled", config.AiProvider);
             
             if (!config.ValidateWeights())
             {
                 Log.Warning("  ? Weights do not sum to 1.0!");
             }
-        }
-
-        private IAiAnalyzer? SetupAiAnalyzer()
-        {
-            var apiKey = _configuration["OPENAI_API_KEY"] ?? _configuration["Secrets:OpenAiApiKey"];
-            
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                Log.Warning("OpenAI API key not configured. AI analysis will be disabled.");
-                return null;
-            }
-
-            var model = _configuration["Ranking:AiModel"] ?? "gpt-4o-mini";
-            
-            // Get delay from config (default 1000ms)
-            int delayMs = 1000;
-            if (int.TryParse(_configuration["Ranking:AiRequestDelayMs"], out var configDelay))
-            {
-                delayMs = configDelay;
-            }
-            
-            Log.Information("AI Analyzer configured: OpenAI ({model}), delay: {delay}ms", model, delayMs);
-            
-            return new OpenAiAnalyzer(_httpClient, apiKey, model, delayMs);
         }
 
         private List<string> FindAvailableSources(string dataPath)
@@ -180,8 +236,7 @@ namespace WebExplorationProject.Tasks
 
         private void GenerateCombinedRanking(
             Dictionary<string, List<PageRanking>> allRankings, 
-            string dataPath,
-            RankingConfiguration config)
+            string dataPath)
         {
             var combined = new List<PageRanking>();
 

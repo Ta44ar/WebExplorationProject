@@ -151,7 +151,7 @@ namespace WebExplorationProject.Crawling
                 {
                     writer.WriteLine(string.Join(",",
                         EscapeCsv(edge.Source),
-                        EscapeCsv(edge.ParentUrl),
+                        EscapeCsv(edge.ParentUrl ?? "(root)"),
                         EscapeCsv(edge.Url),
                         edge.Depth,
                         EscapeCsv(edge.Title),

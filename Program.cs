@@ -26,7 +26,8 @@ class Program
         {
             { 1, new CrawlingTask(configuration, httpClient) },
             { 2, new RankingTask(configuration, httpClient) },
-            { 3, new ClusteringTask(configuration) }
+            { 3, new ClusteringTask(configuration) },
+            { 4, new ClassificationTask(configuration) }
         };
 
         // Parse command line arguments or show menu
