@@ -25,7 +25,8 @@ class Program
         var tasks = new Dictionary<int, ITask>
         {
             { 1, new CrawlingTask(configuration, httpClient) },
-            { 2, new RankingTask(configuration, httpClient) }
+            { 2, new RankingTask(configuration, httpClient) },
+            { 3, new ClusteringTask(configuration) }
         };
 
         // Parse command line arguments or show menu
