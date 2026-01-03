@@ -1,4 +1,4 @@
-# Web Exploration Project
+﻿# Web Exploration Project
 
 A universal project for analyzing web content credibility. Works with **any topic** - not limited to specific subjects.
 
@@ -120,28 +120,50 @@ The project is **fully universal** - works with any search query.
 
 ### AI Dictionary Generation
 
-If you have an OpenAI API key, the program generates topic-specific dictionaries:
+If you have an OpenAI API key, the program **automatically detects the query language** and generates topic-specific dictionaries:
 
 ```
-Query: "is coffee healthy"
+Query: "czy kawa jest zdrowa"
+Detected Language: Polish
 
-? OpenAI generates (1 request, ~$0.001):
+↓ OpenAI generates (1 request, ~$0.001):
 
-SPECIALIST TERMS:
-  caffeine, antioxidants, metabolism, blood pressure...
+SPECIALIST TERMS (in Polish):
+  kofeina, antyoksydanty, metabolizm, ciśnienie krwi...
 
-EMOTIONAL WORDS:
-  miraculous, deadly, revolutionary, dangerous...
+EMOTIONAL WORDS (in Polish):
+  cudowny, zabójczy, rewelacyjny, niebezpieczny...
 
-PROPAGANDA PHRASES:
-  big coffee, hidden from you, scientists discovered...
+PROPAGANDA PHRASES (in Polish):
+  wielka kawa, ukrywają przed tobą, naukowcy odkryli...
 
-? Saved to: data/generated_dictionaries.txt
+→ Saved to: data/generated_dictionaries.txt
 ```
+
+**Language Detection:**
+- Automatically detects Polish or English from query
+- Generates all dictionary terms in the detected language
+- Uses character patterns (ą, ę, ó...) and common words
 
 ### Without OpenAI Key
 
-If no OpenAI key is available, the program uses default dictionaries (optimized for medical/vaccine topics).
+If no OpenAI key is available, the program uses **universal default dictionaries**:
+
+**Specialist Terms (scientific/academic):**
+- peer-review, meta-analysis, systematic review, randomized, control group
+- statistical significance, methodology, hypothesis, correlation, causation
+- evidence-based, reproducibility, empirical, longitudinal study...
+
+**Emotional Words (sensationalism indicators):**
+- shocking, unbelievable, scandal, disaster, terrifying, alarming
+- breaking, exclusive, bombshell, controversial, extreme...
+
+**Propaganda Phrases (manipulation patterns):**
+- "they don't want you to know", "hidden truth", "wake up"
+- "do your own research", "mainstream media lies", "follow the money"
+- "everyone knows", "censored", "suppressed"...
+
+These universal terms work for **any topic** and detect general credibility patterns.
 
 ---
 
@@ -176,7 +198,7 @@ If no OpenAI key is available, the program uses default dictionaries (optimized 
 
 **Formula:**
 ```
-TotalScore = w1�PositionScore + w2�ReferenceScore + w3�SpecialistScore + w4�CredibilityScore
+TotalScore = w1×PositionScore + w2×ReferenceScore + w3×SpecialistScore + w4×CredibilityScore
 ```
 
 **Criteria:**
@@ -226,7 +248,7 @@ TotalScore = w1�PositionScore + w2�ReferenceScore + w3�SpecialistScore + w4�Cred
 | FastTree | Leaves=10, MinData=5 | Leaves=20, MinData=10 |
 | SdcaMaximumEntropy | L2=0.1 | L2=0.01 |
 
-**Experiments:** 8 (2 algorithms � 2 parameters � 2 group sizes)
+**Experiments:** 8 (2 algorithms × 2 parameters × 2 group sizes)
 
 **Output:**
 - `{Source}_classification_results.csv` - Experiment results
@@ -238,39 +260,39 @@ TotalScore = w1�PositionScore + w2�ReferenceScore + w3�SpecialistScore + w4�Cred
 
 ```
 WebExplorationProject/
-??? Analysis/
-?   ??? ClassificationService.cs    # Task 4: ML Classification
-?   ??? ClusteringService.cs        # Task 3: K-Means clustering
-?   ??? RankingService.cs           # Task 2: Page ranking
-?   ??? DictionaryGeneratorService.cs # AI dictionary generation
-??? Crawling/
-?   ??? WebCrawlingService.cs       # Task 1: Web crawler
-?   ??? BfsScheduler.cs             # BFS scheduler
-?   ??? DfsScheduler.cs             # DFS scheduler
-??? Models/
-?   ??? ClassificationModels.cs     # Classification models
-?   ??? ClusteringModels.cs         # Clustering models
-?   ??? ClusteringConfiguration.cs  # Cluster configuration
-?   ??? CrawledEdge.cs              # Graph edge model
-?   ??? CrawlMode.cs                # BFS/DFS enum
-?   ??? PageRanking.cs              # Ranking model
-?   ??? RankingConfiguration.cs     # Ranking configuration
-??? Search/
-?   ??? ISearchProvider.cs          # Search interface
-?   ??? GoogleSearchProvider.cs     # Google Custom Search
-?   ??? BraveSearchProvider.cs      # Brave Search API
-?   ??? SearchCacheService.cs       # Results cache
-??? Tasks/
-?   ??? ITask.cs                    # Task interface
-?   ??? CrawlingTask.cs             # Task 1
-?   ??? RankingTask.cs              # Task 2
-?   ??? ClusteringTask.cs           # Task 3
-?   ??? ClassificationTask.cs       # Task 4
-??? docs/                           # Documentation
-??? data/                           # Generated data
-??? appsettings.json                # Configuration
-??? Program.cs                      # Entry point
-??? WebExplorationProject.csproj    # Project file
+├── Analysis/
+│   ├── ClassificationService.cs    # Task 4: ML Classification
+│   ├── ClusteringService.cs        # Task 3: K-Means clustering
+│   ├── RankingService.cs           # Task 2: Page ranking
+│   └── DictionaryGeneratorService.cs # AI dictionary generation
+├── Crawling/
+│   ├── WebCrawlingService.cs       # Task 1: Web crawler
+│   ├── BfsScheduler.cs             # BFS scheduler
+│   └── DfsScheduler.cs             # DFS scheduler
+├── Models/
+│   ├── ClassificationModels.cs     # Classification models
+│   ├── ClusteringModels.cs         # Clustering models
+│   ├── ClusteringConfiguration.cs  # Cluster configuration
+│   ├── CrawledEdge.cs              # Graph edge model
+│   ├── CrawlMode.cs                # BFS/DFS enum
+│   ├── PageRanking.cs              # Ranking model
+│   └── RankingConfiguration.cs     # Ranking configuration
+├── Search/
+│   ├── ISearchProvider.cs          # Search interface
+│   ├── GoogleSearchProvider.cs     # Google Custom Search
+│   ├── BraveSearchProvider.cs      # Brave Search API
+│   └── SearchCacheService.cs       # Results cache
+├── Tasks/
+│   ├── ITask.cs                    # Task interface
+│   ├── CrawlingTask.cs             # Task 1
+│   ├── RankingTask.cs              # Task 2
+│   ├── ClusteringTask.cs           # Task 3
+│   └── ClassificationTask.cs       # Task 4
+├── docs/                           # Documentation
+├── data/                           # Generated data
+├── appsettings.json                # Configuration
+├── Program.cs                      # Entry point
+└── WebExplorationProject.csproj    # Project file
 ```
 
 ---
@@ -303,10 +325,6 @@ WebExplorationProject/
 - **Logging:** Serilog
 
 ---
-
-## Authors
-
-Project created as part of a university course.
 
 ## License
 

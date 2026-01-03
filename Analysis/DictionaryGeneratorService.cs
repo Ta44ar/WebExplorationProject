@@ -8,6 +8,7 @@ namespace WebExplorationProject.Analysis
     /// <summary>
     /// Service for generating topic-specific dictionaries using OpenAI.
     /// Creates specialist terms and emotional/propaganda words based on search query.
+    /// Automatically detects query language and generates terms in that language.
     /// </summary>
     public class DictionaryGeneratorService
     {
@@ -25,6 +26,7 @@ namespace WebExplorationProject.Analysis
 
         /// <summary>
         /// Generates dictionaries for a given search query/topic.
+        /// Automatically detects language and generates terms accordingly.
         /// </summary>
         public async Task<GeneratedDictionaries?> GenerateDictionariesAsync(string searchQuery)
         {
@@ -36,14 +38,17 @@ namespace WebExplorationProject.Analysis
 
             try
             {
-                Log.Information("Generating topic-specific dictionaries for: {query}", searchQuery);
+                var detectedLanguage = DetectLanguage(searchQuery);
+                Log.Information("Generating dictionaries for: \"{query}\" (detected language: {lang})", 
+                    searchQuery, detectedLanguage);
 
-                var prompt = BuildPrompt(searchQuery);
+                var prompt = BuildPrompt(searchQuery, detectedLanguage);
                 var response = await CallOpenAiAsync(prompt);
                 var dictionaries = ParseResponse(response);
 
                 if (dictionaries != null)
                 {
+                    dictionaries.DetectedLanguage = detectedLanguage;
                     Log.Information("Generated dictionaries: {specialist} specialist terms, {emotional} emotional words, {propaganda} propaganda phrases",
                         dictionaries.SpecialistTerms.Count,
                         dictionaries.EmotionalWords.Count,
@@ -59,12 +64,60 @@ namespace WebExplorationProject.Analysis
             }
         }
 
-        private string BuildPrompt(string searchQuery)
+        /// <summary>
+        /// Simple language detection based on character patterns and common words.
+        /// Supports Polish and English detection with high accuracy.
+        /// </summary>
+        private string DetectLanguage(string text)
         {
+            if (string.IsNullOrWhiteSpace(text))
+                return "English";
+
+            var textLower = text.ToLowerInvariant();
+
+            // Polish-specific characters (definitive indicator)
+            var polishChars = new[] { '¹', 'æ', 'ê', '³', 'ñ', 'œ', 'Ÿ', '¿' };
+            if (polishChars.Any(c => textLower.Contains(c)))
+            {
+                return "Polish";
+            }
+
+            // Common Polish words and patterns
+            var polishIndicators = new[] 
+            { 
+                "czy", "jak", "jest", "siê", "nie", "tak", "dla", "ale", "lub", "oraz",
+                "tego", "jako", "przy", "mo¿e", "tylko", "przez", "który", "która", "które",
+                "bardzo", "jednak", "tak¿e", "gdzie", "kiedy", "dlaczego", "poniewa¿"
+            };
+            
+            var words = textLower.Split(new[] { ' ', ',', '.', '?', '!' }, StringSplitOptions.RemoveEmptyEntries);
+            var polishWordCount = words.Count(w => polishIndicators.Contains(w));
+            
+            // Polish word endings
+            var polishEndings = new[] { "owaæ", "acja", "enie", "anie", "oœæ", "stwo", "kiem", "cj¹" };
+            var hasPolishEnding = words.Any(w => polishEndings.Any(e => w.EndsWith(e)));
+            
+            if (polishWordCount >= 1 || hasPolishEnding)
+            {
+                return "Polish";
+            }
+
+            // Default to English
+            return "English";
+        }
+
+        private string BuildPrompt(string searchQuery, string language)
+        {
+            var languageInstruction = language == "Polish" 
+                ? "Generate ALL terms in Polish language."
+                : "Generate ALL terms in English language.";
+
             return $@"You are an expert in media literacy and content analysis. 
 For the following search query/topic, generate dictionaries of terms that would help analyze the credibility of web content.
 
 Search Query: ""{searchQuery}""
+
+{languageInstruction}
 
 Generate JSON with the following structure:
 {{
@@ -84,7 +137,7 @@ Guidelines:
 4. **emotional_words**: 20-30 emotionally loaded words that suggest bias (e.g., ""shocking"", ""scandal"", ""conspiracy"")
 5. **propaganda_phrases**: 15-25 phrases that indicate manipulation (e.g., ""they don't want you to know"", ""hidden truth"")
 
-Include terms in the same language as the query (if Polish query, use Polish terms).
+IMPORTANT: All terms MUST be in {language}.
 Respond ONLY with valid JSON, no markdown or explanation.";
         }
 
@@ -210,6 +263,7 @@ Respond ONLY with valid JSON, no markdown or explanation.";
     /// </summary>
     public class GeneratedDictionaries
     {
+        public string DetectedLanguage { get; set; } = "English";
         public List<string> TopicKeywords { get; set; } = new();
         public HashSet<string> SpecialistTerms { get; set; } = new(StringComparer.OrdinalIgnoreCase);
         public HashSet<string> EmotionalWords { get; set; } = new(StringComparer.OrdinalIgnoreCase);

@@ -405,24 +405,24 @@ namespace WebExplorationProject.Analysis
         {
             return new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
-                // General scientific terms
-                "badanie kliniczne", "peer-review", "metaanaliza", "randomizacja",
-                "grupa kontrolna", "placebo", "skuteczność", "bezpieczeństwo",
-                "epidemiologia", "immunologia", "patogen", "antygen", "przeciwciało",
-                "efekt uboczny", "działanie niepożądane", "korelacja", "przyczynowość",
-                "statystycznie istotny", "próba", "populacja", "badanie kohortowe",
-                // Vaccine terms
-                "szczepionka", "immunizacja", "odporność", "adiuwant",
-                "mRNA", "wektor wirusowy", "odpowiedź immunologiczna", "tiomersal",
-                "aluminium", "skuteczność szczepionki", "NOP", "VAERS", "kalendarz szczepień",
-                "odporność zbiorowiskowa", "szczepienia ochronne", "dawka przypominająca",
-                // Autism terms
-                "autyzm", "spektrum autyzmu", "ASD", "zaburzenie rozwojowe",
-                "diagnoza", "terapia behawioralna", "neurologia", "genetyka",
-                "rozwój dziecka", "neuroróżnorodność", "Asperger",
-                // English equivalents
-                "clinical trial", "peer-review", "meta-analysis", "randomization",
-                "control group", "placebo", "efficacy", "safety", "epidemiology"
+                // General scientific/academic terms (universal)
+                "peer-review", "peer-reviewed", "meta-analysis", "systematic review",
+                "randomized", "control group", "placebo", "double-blind",
+                "statistical significance", "confidence interval", "p-value",
+                "methodology", "hypothesis", "empirical", "quantitative", "qualitative",
+                "correlation", "causation", "sample size", "population",
+                "longitudinal study", "cross-sectional", "cohort study", "case study",
+                "literature review", "primary source", "secondary source",
+                "reproducibility", "replication", "bias", "confounding variable",
+                "evidence-based", "data-driven", "findings", "conclusions",
+                
+                // Polish equivalents
+                "badanie kliniczne", "metaanaliza", "przegląd systematyczny",
+                "randomizacja", "grupa kontrolna", "podwójnie ślepa próba",
+                "istotność statystyczna", "przedział ufności", "metodologia",
+                "hipoteza", "korelacja", "przyczynowość", "próba badawcza",
+                "badanie kohortowe", "badanie przekrojowe", "powtarzalność",
+                "wiarygodność", "dane empiryczne", "wnioski"
             };
         }
 
@@ -430,14 +430,18 @@ namespace WebExplorationProject.Analysis
         {
             return new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
-                "szokujący", "przerażający", "niesamowity", "niewiarygodny",
-                "skandal", "afera", "tragedia", "katastrofa", "zbrodnia",
-                "oszustwo", "kłamstwo", "spisek", "ukrywają", "cenzura",
-                "prawda", "ujawniono", "sekret", "rewelacje", "bomba",
-                "dramat", "horror", "masakra", "apokalipsa",
-                "shocking", "unbelievable", "incredible", "amazing",
-                "scandal", "conspiracy", "cover-up", "hidden", "secret",
-                "truth", "revealed", "exposed", "bombshell", "outrageous"
+                // English emotional/sensational words (universal)
+                "shocking", "unbelievable", "incredible", "amazing", "outrageous",
+                "scandal", "disaster", "catastrophe", "crisis", "nightmare",
+                "terrifying", "horrifying", "disturbing", "alarming", "urgent",
+                "breaking", "exclusive", "bombshell", "explosive", "stunning",
+                "controversial", "sensational", "dramatic", "extreme",
+                
+                // Polish equivalents
+                "szokujący", "niewiarygodny", "niesamowity", "skandaliczny",
+                "katastrofa", "tragedia", "kryzys", "koszmar", "przerażający",
+                "alarmujący", "pilne", "ekskluzywny", "kontrowersyjny",
+                "dramatyczny", "ekstremalny", "rewelacyjny"
             };
         }
 
@@ -445,18 +449,22 @@ namespace WebExplorationProject.Analysis
         {
             return new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
-                "twoje dziecko", "ryzykujesz życie", "nie daj się oszukać",
-                "przemysł farmaceutyczny", "big pharma", "rząd ukrywa",
-                "naukowcy twierdzą", "badania wykazały", "eksperci mówią",
-                "według badań", "udowodniono że",
-                "wszyscy wiedzą", "każdy wie", "oczywiste jest",
-                "nikt nie wierzy", "miliony ludzi",
-                "ukryta prawda", "nie chcą żebyś wiedział", "mainstream media",
-                "alternatywna medycyna", "naturalne metody",
-                "musisz to zobaczyć", "nie uwierzysz", "szok",
-                "pilne", "breaking", "ekskluzywne",
+                // English propaganda/manipulation phrases (universal)
                 "they don't want you to know", "hidden truth", "wake up",
-                "do your own research", "mainstream media lies"
+                "do your own research", "mainstream media lies", "cover-up",
+                "exposed", "the real truth", "what they're hiding",
+                "open your eyes", "sheeple", "think for yourself",
+                "follow the money", "connect the dots", "it's obvious",
+                "everyone knows", "nobody talks about", "censored",
+                "banned", "suppressed", "silenced", "the elite",
+                
+                // Polish equivalents
+                "ukryta prawda", "nie chcą żebyś wiedział", "obudź się",
+                "zrób własne badania", "media kłamią", "tuszowanie",
+                "prawdziwa prawda", "co ukrywają", "otwórz oczy",
+                "myśl samodzielnie", "podążaj za pieniędzmi", "to oczywiste",
+                "wszyscy wiedzą", "nikt nie mówi", "cenzurowane",
+                "zakazane", "tłumione", "uciszane", "elity"
             };
         }
 
