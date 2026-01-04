@@ -5,6 +5,7 @@ using Serilog;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using WebExplorationProject.Helpers;
 using WebExplorationProject.Models;
 
 namespace WebExplorationProject.Crawling
@@ -35,11 +36,7 @@ namespace WebExplorationProject.Crawling
 
             _maxWidth = maxWidth;
             _crawlMode = crawlMode;
-
-            var projectDir = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent?.FullName
-                ?? AppContext.BaseDirectory;
-            _dataPath = Path.Combine(projectDir, "data");
-            Directory.CreateDirectory(_dataPath);
+            _dataPath = DataPaths.CrawlingPath;
         }
 
         public async Task CrawlUrlsAsync(IList<string> urls, string sourceName)
@@ -314,20 +311,47 @@ namespace WebExplorationProject.Crawling
         public void ExportComparisonArtifacts(string sourceA, string sourceB)
         {
             var compareName = $"Compare_{sourceA}_{sourceB}";
-            ExportComparisonGraphvizFromCsv(sourceA, sourceB, compareName);
             
-            // Use direct paths for comparison (no _crawlMode suffix)
+            // Find actual CSV files (with _BFS or _DFS suffix)
+            var csvA = FindCsvFile(sourceA);
+            var csvB = FindCsvFile(sourceB);
+            
+            if (csvA == null || csvB == null)
+            {
+                Log.Warning("[COMPARE] Missing CSV files for comparison. A={a}, B={b}", 
+                    csvA ?? "not found", csvB ?? "not found");
+                return;
+            }
+            
+            ExportComparisonGraphvizFromCsv(csvA, csvB, sourceA, sourceB, compareName);
+            
             var dotPath = Path.Combine(_dataPath, $"{compareName}_graph.dot");
             var pngPath = Path.Combine(_dataPath, $"{compareName}_graph.png");
             GeneratePngFromDot(dotPath, pngPath, compareName);
             
-            WriteComparisonMetricsFromCsv(sourceA, sourceB, compareName);
+            WriteComparisonMetricsFromCsv(csvA, csvB, sourceA, sourceB, compareName);
         }
 
-        private void ExportComparisonGraphvizFromCsv(string sourceA, string sourceB, string outputName)
+        private string? FindCsvFile(string sourceName)
         {
-            var csvA = Path.Combine(_dataPath, $"{sourceA}_graph.csv");
-            var csvB = Path.Combine(_dataPath, $"{sourceB}_graph.csv");
+            // Try with crawl mode suffix first
+            var withMode = Path.Combine(_dataPath, $"{sourceName}_{_crawlMode}_graph.csv");
+            if (File.Exists(withMode))
+                return withMode;
+            
+            // Try without suffix (legacy)
+            var withoutMode = Path.Combine(_dataPath, $"{sourceName}_graph.csv");
+            if (File.Exists(withoutMode))
+                return withoutMode;
+            
+            // Try to find any matching file
+            var pattern = $"{sourceName}_*_graph.csv";
+            var matches = Directory.GetFiles(_dataPath, pattern);
+            return matches.FirstOrDefault();
+        }
+
+        private void ExportComparisonGraphvizFromCsv(string csvA, string csvB, string sourceA, string sourceB, string outputName)
+        {
             var dotPath = Path.Combine(_dataPath, $"{outputName}_graph.dot");
 
             if (!File.Exists(csvA) || !File.Exists(csvB))
@@ -341,7 +365,7 @@ namespace WebExplorationProject.Crawling
             var edgesA = new HashSet<(string From, string To)>();
             var edgesB = new HashSet<(string From, string To)>();
 
-            // Nodes per source (we include both endpoints)
+            // Nodes per source
             var nodesA = new HashSet<string>();
             var nodesB = new HashSet<string>();
 
@@ -351,12 +375,11 @@ namespace WebExplorationProject.Crawling
             var allNodes = new HashSet<string>(nodesA);
             allNodes.UnionWith(nodesB);
 
-            // Map URL -> stable DOT id (so labels can be nice and URLs can contain special chars)
+            // Map URL -> stable DOT id
             var nodeId = new Dictionary<string, string>(capacity: allNodes.Count);
             int idx = 0;
             foreach (var url in allNodes)
             {
-                // stable, short id; keeps DOT readable
                 nodeId[url] = "n" + (++idx).ToString();
             }
 
@@ -405,7 +428,6 @@ namespace WebExplorationProject.Crawling
                 int penwidth = (inA && inB) ? 2 : 1;
                 string style = (inA && inB) ? "solid" : "dashed";
 
-                // Ensure endpoints exist as nodes
                 if (!nodeId.ContainsKey(e.From) || !nodeId.ContainsKey(e.To))
                     continue;
 
@@ -414,12 +436,12 @@ namespace WebExplorationProject.Crawling
 
             // Legend
             w.WriteLine("  subgraph cluster_legend {");
-            w.WriteLine("    label=\"Legenda\";");
+            w.WriteLine("    label=\"Legend\";");
             w.WriteLine("    fontsize=10;");
             w.WriteLine("    color=gray80;");
-            w.WriteLine($"    la [label=\"tylko {sourceA}\", color={colorA}];");
-            w.WriteLine($"    lb [label=\"tylko {sourceB}\", color={colorB}];");
-            w.WriteLine($"    lab [label=\"w obu\", color={colorBoth}, penwidth=2];");
+            w.WriteLine($"    la [label=\"{sourceA} only\", color={colorA}];");
+            w.WriteLine($"    lb [label=\"{sourceB} only\", color={colorB}];");
+            w.WriteLine($"    lab [label=\"both\", color={colorBoth}, penwidth=2];");
             w.WriteLine("  }");
 
             w.WriteLine("}");
@@ -450,11 +472,15 @@ namespace WebExplorationProject.Crawling
             }
         }
 
-        private void WriteComparisonMetricsFromCsv(string sourceA, string sourceB, string outputName)
+        private void WriteComparisonMetricsFromCsv(string csvA, string csvB, string sourceA, string sourceB, string outputName)
         {
-            var csvA = Path.Combine(_dataPath, $"{sourceA}_graph.csv");
-            var csvB = Path.Combine(_dataPath, $"{sourceB}_graph.csv");
             var metricsPath = Path.Combine(_dataPath, $"{outputName}_metrics.txt");
+
+            if (!File.Exists(csvA) || !File.Exists(csvB))
+            {
+                Log.Warning("[COMPARE] Cannot write metrics - missing CSV files");
+                return;
+            }
 
             var edgesA = new HashSet<(string From, string To)>();
             var edgesB = new HashSet<(string From, string To)>();
@@ -490,29 +516,29 @@ namespace WebExplorationProject.Crawling
             double jDomains = unionDomains.Count == 0 ? 0 : (double)commonDomains.Count / unionDomains.Count;
 
             var sb = new StringBuilder();
-            sb.AppendLine($"Porównanie: {sourceA} vs {sourceB}");
+            sb.AppendLine($"Comparison: {sourceA} vs {sourceB}");
             sb.AppendLine($"CSV A: {Path.GetFileName(csvA)}");
             sb.AppendLine($"CSV B: {Path.GetFileName(csvB)}");
             sb.AppendLine();
-            sb.AppendLine("=== Węzły (URLs) ===");
+            sb.AppendLine("=== Nodes (URLs) ===");
             sb.AppendLine($"{sourceA}: {nodesA.Count}");
             sb.AppendLine($"{sourceB}: {nodesB.Count}");
-            sb.AppendLine($"Wspólne: {commonNodes.Count}");
-            sb.AppendLine($"Unia: {unionNodes.Count}");
+            sb.AppendLine($"Common: {commonNodes.Count}");
+            sb.AppendLine($"Union: {unionNodes.Count}");
             sb.AppendLine($"Jaccard(nodes): {jNodes:F3}");
             sb.AppendLine();
-            sb.AppendLine("=== Krawędzie (linki) ===");
+            sb.AppendLine("=== Edges (links) ===");
             sb.AppendLine($"{sourceA}: {edgesA.Count}");
             sb.AppendLine($"{sourceB}: {edgesB.Count}");
-            sb.AppendLine($"Wspólne: {commonEdges.Count}");
-            sb.AppendLine($"Unia: {unionEdges.Count}");
+            sb.AppendLine($"Common: {commonEdges.Count}");
+            sb.AppendLine($"Union: {unionEdges.Count}");
             sb.AppendLine($"Jaccard(edges): {jEdges:F3}");
             sb.AppendLine();
-            sb.AppendLine("=== Domeny ===");
+            sb.AppendLine("=== Domains ===");
             sb.AppendLine($"{sourceA}: {domainsA.Count}");
             sb.AppendLine($"{sourceB}: {domainsB.Count}");
-            sb.AppendLine($"Wspólne: {commonDomains.Count}");
-            sb.AppendLine($"Unia: {unionDomains.Count}");
+            sb.AppendLine($"Common: {commonDomains.Count}");
+            sb.AppendLine($"Union: {unionDomains.Count}");
             sb.AppendLine($"Jaccard(domains): {jDomains:F3}");
             sb.AppendLine();
 

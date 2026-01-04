@@ -24,17 +24,19 @@ namespace WebExplorationProject.Analysis
     /// </summary>
     public class ClusteringService
     {
-        private readonly string _dataPath;
+        private readonly string _inputPath;
+        private readonly string _outputPath;
         private readonly ClusteringConfiguration _config;
         private readonly MLContext _mlContext;
 
-        public ClusteringService(string dataPath, ClusteringConfiguration? config = null)
+        public ClusteringService(string inputPath, string outputPath, ClusteringConfiguration? config = null)
         {
-            _dataPath = dataPath;
+            _inputPath = inputPath;
+            _outputPath = outputPath;
             _config = config ?? new ClusteringConfiguration();
-            _mlContext = new MLContext(seed: 42); // Fixed seed for reproducibility
+            _mlContext = new MLContext(seed: 42);
 
-            Directory.CreateDirectory(_dataPath);
+            Directory.CreateDirectory(_outputPath);
         }
 
         /// <summary>
@@ -44,7 +46,6 @@ namespace WebExplorationProject.Analysis
         {
             var results = new Dictionary<int, List<ClusteredPage>>();
 
-            // Load ranking data
             var rankingData = LoadRankingData(sourceName);
             if (rankingData.Count == 0)
             {
@@ -54,7 +55,6 @@ namespace WebExplorationProject.Analysis
 
             Log.Information("[{src}] Loaded {count} pages for clustering", sourceName, rankingData.Count);
 
-            // Cluster for each K value
             foreach (var k in _config.ClusterCounts)
             {
                 Log.Information("[{src}] Clustering with K={k}...", sourceName, k);
@@ -63,24 +63,20 @@ namespace WebExplorationProject.Analysis
                 AssignClusterLabels(clustered, k);
                 
                 results[k] = clustered;
-
-                // Save results
                 SaveClusteringResults(clustered, sourceName, k);
                 
-                // Log statistics
                 var stats = CalculateClusterStatistics(clustered, k);
                 LogClusterStatistics(stats, sourceName, k);
             }
 
-            // Save comprehensive report
             SaveClusteringReport(results, sourceName);
-
             return results;
         }
 
         private List<ClusteringInput> LoadRankingData(string sourceName)
         {
-            var csvPath = Path.Combine(_dataPath, $"{sourceName}_ranking.csv");
+            // Read from input path (ranking folder)
+            var csvPath = Path.Combine(_inputPath, $"{sourceName}_ranking.csv");
 
             if (!File.Exists(csvPath))
             {
@@ -89,7 +85,7 @@ namespace WebExplorationProject.Analysis
             }
 
             var data = new List<ClusteringInput>();
-            var lines = File.ReadAllLines(csvPath, Encoding.UTF8).Skip(1); // Skip header
+            var lines = File.ReadAllLines(csvPath, Encoding.UTF8).Skip(1);
 
             foreach (var line in lines)
             {
@@ -246,14 +242,13 @@ namespace WebExplorationProject.Analysis
 
         private void SaveClusteringResults(List<ClusteredPage> clustered, string sourceName, int k)
         {
-            var csvPath = Path.Combine(_dataPath, $"{sourceName}_clusters_k{k}.csv");
+            // Write to output path (clustering folder)
+            var csvPath = Path.Combine(_outputPath, $"{sourceName}_clusters_k{k}.csv");
 
             using var writer = new StreamWriter(csvPath, false, new UTF8Encoding(true));
 
-            // Header
             writer.WriteLine("ClusterId,ClusterLabel,OriginalRank,Url,Title,TotalScore,PositionScore,ReferenceScore,SpecialistScore,CredibilityScore,DistanceToCenter");
 
-            // Sort by cluster, then by score
             var sorted = clustered
                 .OrderBy(p => p.ClusterId)
                 .ThenByDescending(p => p.TotalScore);
@@ -279,7 +274,8 @@ namespace WebExplorationProject.Analysis
 
         private void SaveClusteringReport(Dictionary<int, List<ClusteredPage>> allResults, string sourceName)
         {
-            var reportPath = Path.Combine(_dataPath, $"{sourceName}_clustering_report.txt");
+            // Write to output path
+            var reportPath = Path.Combine(_outputPath, $"{sourceName}_clustering_report.txt");
             var sb = new StringBuilder();
 
             sb.AppendLine($"=== CLUSTERING REPORT: {sourceName} ===");

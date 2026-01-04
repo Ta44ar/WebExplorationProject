@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using WebExplorationProject.Analysis;
+using WebExplorationProject.Helpers;
 using WebExplorationProject.Models;
 
 namespace WebExplorationProject.Tasks
@@ -27,29 +28,30 @@ namespace WebExplorationProject.Tasks
             Log.Information("=== TASK 3: Page Clustering (ML.NET K-Means) ===");
             Log.Information(Description);
 
-            // Get data path
-            var projectDir = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent?.FullName
-                ?? AppContext.BaseDirectory;
-            var dataPath = Path.Combine(projectDir, "data");
+            var rankingPath = DataPaths.RankingPath;
+            var clusteringPath = DataPaths.ClusteringPath;
 
-            if (!Directory.Exists(dataPath))
+            if (!Directory.Exists(rankingPath))
             {
-                Log.Error("Data directory not found: {path}. Run Task 1 & 2 first.", dataPath);
+                Log.Error("Ranking data not found: {path}. Run Task 2 first.", rankingPath);
                 return;
             }
+
+            Log.Information("Input: {input}", rankingPath);
+            Log.Information("Output: {output}", clusteringPath);
 
             // Load configuration
             var config = LoadClusteringConfiguration();
             LogConfiguration(config);
 
-            var clusteringService = new ClusteringService(dataPath, config);
+            var clusteringService = new ClusteringService(rankingPath, clusteringPath, config);
 
             // Find available ranking results
-            var sources = FindAvailableSources(dataPath);
+            var sources = FindAvailableSources(rankingPath);
 
             if (sources.Count == 0)
             {
-                Log.Error("No ranking data found in {path}. Run Task 2 first.", dataPath);
+                Log.Error("No ranking data found in {path}. Run Task 2 first.", rankingPath);
                 return;
             }
 
@@ -64,25 +66,19 @@ namespace WebExplorationProject.Tasks
             }
 
             // Cluster combined data if available
-            if (File.Exists(Path.Combine(dataPath, "Combined_ranking.csv")))
+            if (File.Exists(Path.Combine(rankingPath, "Combined_ranking.csv")))
             {
                 Log.Information("\n=== Clustering: Combined ===");
-                await ClusterCombinedDataAsync(clusteringService, dataPath, config);
+                await ClusterCombinedDataAsync(clusteringService, rankingPath, clusteringPath, config);
             }
 
-            Log.Information("\nTask 3 completed. Check 'data' folder for clustering results.");
-            Log.Information("Files generated:");
-            foreach (var k in config.ClusterCounts)
-            {
-                Log.Information("  - {{source}}_clusters_k{k}.csv", k);
-            }
-            Log.Information("  - {{source}}_clustering_report.txt");
+            Log.Information("\nTask 3 completed. Results saved to: {path}", clusteringPath);
         }
 
-        private async Task ClusterCombinedDataAsync(ClusteringService service, string dataPath, ClusteringConfiguration config)
+        private async Task ClusterCombinedDataAsync(ClusteringService service, string rankingPath, string clusteringPath, ClusteringConfiguration config)
         {
-            var combinedPath = Path.Combine(dataPath, "Combined_ranking.csv");
-            var tempRankingPath = Path.Combine(dataPath, "CombinedData_ranking.csv");
+            var combinedPath = Path.Combine(rankingPath, "Combined_ranking.csv");
+            var tempRankingPath = Path.Combine(rankingPath, "CombinedData_ranking.csv");
 
             try
             {
@@ -100,23 +96,20 @@ namespace WebExplorationProject.Tasks
                     var fields = ParseCsvLine(line);
                     if (fields.Count >= 9)
                     {
-                        // Combined format: FinalRank,Source,Url,Title,TotalScore,PositionScore,ReferenceScore,SpecialistScore,CredibilityScore
-                        // Ranking format: FinalRank,Url,Title,TotalScore,PositionScore,ReferenceScore,SpecialistScore,CredibilityScore,EmotionScore
                         outputLines.Add($"{fields[0]},{EscapeCsv(fields[2])},{EscapeCsv(fields[3])},{fields[4]},{fields[5]},{fields[6]},{fields[7]},{fields[8]},0");
                     }
                 }
 
-                // Write all at once (ensures file is closed)
                 File.WriteAllLines(tempRankingPath, outputLines, System.Text.Encoding.UTF8);
                 
                 // Cluster using the combined data
                 await service.ClusterPagesAsync("CombinedData");
 
-                // Rename output files to "Combined_" prefix
+                // Rename output files to "Combined_" prefix (files are in clusteringPath)
                 foreach (var k in config.ClusterCounts)
                 {
-                    var oldPath = Path.Combine(dataPath, $"CombinedData_clusters_k{k}.csv");
-                    var newPath = Path.Combine(dataPath, $"Combined_clusters_k{k}.csv");
+                    var oldPath = Path.Combine(clusteringPath, $"CombinedData_clusters_k{k}.csv");
+                    var newPath = Path.Combine(clusteringPath, $"Combined_clusters_k{k}.csv");
                     if (File.Exists(oldPath))
                     {
                         if (File.Exists(newPath)) File.Delete(newPath);
@@ -124,8 +117,8 @@ namespace WebExplorationProject.Tasks
                     }
                 }
 
-                var oldReport = Path.Combine(dataPath, "CombinedData_clustering_report.txt");
-                var newReport = Path.Combine(dataPath, "Combined_clustering_report.txt");
+                var oldReport = Path.Combine(clusteringPath, "CombinedData_clustering_report.txt");
+                var newReport = Path.Combine(clusteringPath, "Combined_clustering_report.txt");
                 if (File.Exists(oldReport))
                 {
                     if (File.Exists(newReport)) File.Delete(newReport);

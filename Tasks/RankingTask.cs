@@ -1,17 +1,13 @@
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using WebExplorationProject.Analysis;
+using WebExplorationProject.Helpers;
 using WebExplorationProject.Models;
 
 namespace WebExplorationProject.Tasks
 {
     /// <summary>
     /// Task 2: Page Ranking Analysis.
-    /// Analyzes crawled pages and creates rankings based on:
-    /// - Search position
-    /// - External references
-    /// - Specialist terminology
-    /// - Emotional/propaganda content
     /// </summary>
     public class RankingTask : ITask
     {
@@ -19,7 +15,7 @@ namespace WebExplorationProject.Tasks
         private readonly HttpClient _httpClient;
 
         public string Name => "Ranking Task";
-        public string Description => "Analyze crawled pages ? Generate credibility rankings (CSV/TXT)";
+        public string Description => "Analyze crawled pages -> Generate credibility rankings (CSV/TXT)";
 
         public RankingTask(IConfiguration configuration, HttpClient httpClient)
         {
@@ -32,23 +28,24 @@ namespace WebExplorationProject.Tasks
             Log.Information("=== TASK 2: Page Ranking Analysis ===");
             Log.Information(Description);
 
-            // Get data path
-            var projectDir = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent?.FullName
-                ?? AppContext.BaseDirectory;
-            var dataPath = Path.Combine(projectDir, "data");
+            var crawlingPath = DataPaths.CrawlingPath;
+            var rankingPath = DataPaths.RankingPath;
 
-            if (!Directory.Exists(dataPath))
+            if (!Directory.Exists(crawlingPath))
             {
-                Log.Error("Data directory not found: {path}. Run Task 1 first.", dataPath);
+                Log.Error("Crawling data not found: {path}. Run Task 1 first.", crawlingPath);
                 return;
             }
+
+            Log.Information("Input: {input}", crawlingPath);
+            Log.Information("Output: {output}", rankingPath);
 
             // Load ranking configuration
             var config = LoadRankingConfiguration();
             LogConfiguration(config);
 
             // Get search query for context
-            string searchQuery = _configuration["Search:Query"] ?? "czy szczepionki powoduj¹ autyzm";
+            string searchQuery = _configuration["Search:Query"] ?? "default query";
 
             // Generate topic-specific dictionaries using AI (if available)
             GeneratedDictionaries? generatedDictionaries = null;
@@ -57,14 +54,15 @@ namespace WebExplorationProject.Tasks
                 generatedDictionaries = await GenerateDictionariesAsync(searchQuery);
             }
 
-            var rankingService = new RankingService(dataPath, config, generatedDictionaries);
+            // RankingService reads from crawlingPath, writes to rankingPath
+            var rankingService = new RankingService(crawlingPath, rankingPath, config, generatedDictionaries);
 
             // Find available crawl results
-            var sources = FindAvailableSources(dataPath);
+            var sources = FindAvailableSources(crawlingPath);
             
             if (sources.Count == 0)
             {
-                Log.Error("No crawl data found in {path}. Run Task 1 first.", dataPath);
+                Log.Error("No crawl data found in {path}. Run Task 1 first.", crawlingPath);
                 return;
             }
 
@@ -85,17 +83,10 @@ namespace WebExplorationProject.Tasks
             if (allRankings.Count > 1)
             {
                 Log.Information("\n=== Generating Combined Ranking ===");
-                GenerateCombinedRanking(allRankings, dataPath);
+                GenerateCombinedRanking(allRankings, rankingPath);
             }
 
-            Log.Information("\nTask 2 completed. Check 'data' folder for ranking results.");
-            Log.Information("Files generated:");
-            Log.Information("  - {{source}}_ranking.csv - Ranking scores");
-            Log.Information("  - {{source}}_ranking_details.txt - Detailed report");
-            if (generatedDictionaries != null)
-            {
-                Log.Information("  - generated_dictionaries.txt - AI-generated dictionaries");
-            }
+            Log.Information("\nTask 2 completed. Results saved to: {path}", rankingPath);
         }
 
         private bool ShouldGenerateDictionaries()
@@ -146,10 +137,7 @@ namespace WebExplorationProject.Tasks
 
         private void SaveGeneratedDictionaries(GeneratedDictionaries dictionaries, string query)
         {
-            var projectDir = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent?.FullName
-                ?? AppContext.BaseDirectory;
-            var dataPath = Path.Combine(projectDir, "data");
-            var filePath = Path.Combine(dataPath, "generated_dictionaries.txt");
+            var filePath = Path.Combine(DataPaths.RankingPath, "generated_dictionaries.txt");
 
             var sb = new System.Text.StringBuilder();
             sb.AppendLine($"=== GENERATED DICTIONARIES ===");

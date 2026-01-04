@@ -22,7 +22,8 @@ namespace WebExplorationProject.Analysis
     /// </summary>
     public class RankingService
     {
-        private readonly string _dataPath;
+        private readonly string _inputPath;
+        private readonly string _outputPath;
         private readonly RankingConfiguration _config;
         private readonly HashSet<string> _specialistTerms;
         private readonly HashSet<string> _emotionalWords;
@@ -30,14 +31,16 @@ namespace WebExplorationProject.Analysis
         private readonly bool _usingGeneratedDictionaries;
 
         public RankingService(
-            string dataPath, 
+            string inputPath,
+            string outputPath,
             RankingConfiguration? config = null,
             GeneratedDictionaries? generatedDictionaries = null)
         {
-            _dataPath = dataPath;
+            _inputPath = inputPath;
+            _outputPath = outputPath;
             _config = config ?? new RankingConfiguration();
             
-            Directory.CreateDirectory(_dataPath);
+            Directory.CreateDirectory(_outputPath);
 
             // Use generated dictionaries if available, otherwise use defaults
             if (generatedDictionaries != null && generatedDictionaries.SpecialistTerms.Count > 0)
@@ -52,7 +55,6 @@ namespace WebExplorationProject.Analysis
             }
             else
             {
-                // Initialize default term dictionaries
                 _specialistTerms = InitializeDefaultSpecialistTerms();
                 _emotionalWords = InitializeDefaultEmotionalWords();
                 _propagandaPhrases = InitializeDefaultPropagandaPhrases();
@@ -72,21 +74,21 @@ namespace WebExplorationProject.Analysis
         /// </summary>
         public async Task<List<PageRanking>> GenerateRankingAsync(string sourceName, string? searchQuery = null)
         {
-            var csvPath = Path.Combine(_dataPath, $"{sourceName}_BFS_graph.csv");
+            // Read from input path (crawling folder)
+            var csvPath = Path.Combine(_inputPath, $"{sourceName}_BFS_graph.csv");
             
-            // Try alternative naming patterns
             if (!File.Exists(csvPath))
             {
-                csvPath = Path.Combine(_dataPath, $"{sourceName}_DFS_graph.csv");
+                csvPath = Path.Combine(_inputPath, $"{sourceName}_DFS_graph.csv");
             }
             if (!File.Exists(csvPath))
             {
-                csvPath = Path.Combine(_dataPath, $"{sourceName}_graph.csv");
+                csvPath = Path.Combine(_inputPath, $"{sourceName}_graph.csv");
             }
 
             if (!File.Exists(csvPath))
             {
-                Log.Error("[{src}] No crawl CSV found in: {path}", sourceName, _dataPath);
+                Log.Error("[{src}] No crawl CSV found in: {path}", sourceName, _inputPath);
                 return new List<PageRanking>();
             }
 
@@ -99,7 +101,6 @@ namespace WebExplorationProject.Analysis
 
             // Build link graph for reference analysis
             var linkGraph = BuildLinkGraph(lines);
-
             var rankings = new List<PageRanking>();
             int position = 0;
 
@@ -107,12 +108,7 @@ namespace WebExplorationProject.Analysis
             {
                 position++;
                 
-                var ranking = AnalyzePage(
-                    line, 
-                    position, 
-                    totalPages, 
-                    linkGraph, 
-                    sourceName);
+                var ranking = AnalyzePage(line, position, totalPages, linkGraph, sourceName);
                 
                 if (!string.IsNullOrEmpty(ranking.Url))
                 {
@@ -122,8 +118,7 @@ namespace WebExplorationProject.Analysis
                 // Progress logging
                 if (position % 100 == 0)
                 {
-                    Log.Information("[{src}] Analyzed {pos}/{total} pages", 
-                        sourceName, position, totalPages);
+                    Log.Information("[{src}] Analyzed {pos}/{total} pages", sourceName, position, totalPages);
                 }
             }
 
@@ -140,7 +135,7 @@ namespace WebExplorationProject.Analysis
                 sortedRankings[i].FinalRank = i + 1;
             }
 
-            // Save results
+            // Save to output path (ranking folder)
             SaveRankingToCsv(sortedRankings, sourceName);
             SaveRankingDetails(sortedRankings, sourceName);
 
@@ -306,9 +301,9 @@ namespace WebExplorationProject.Analysis
 
         private void SaveRankingToCsv(List<PageRanking> rankings, string sourceName)
         {
-            var outputPath = Path.Combine(_dataPath, $"{sourceName}_ranking.csv");
+            var outputFilePath = Path.Combine(_outputPath, $"{sourceName}_ranking.csv");
 
-            using var writer = new StreamWriter(outputPath, false, new UTF8Encoding(true));
+            using var writer = new StreamWriter(outputFilePath, false, new UTF8Encoding(true));
             
             writer.WriteLine("FinalRank,Url,Title,TotalScore,PositionScore,ReferenceScore,SpecialistScore,CredibilityScore,EmotionScore,SearchPosition,OutboundLinks,SpecialistTerms,EmotionalWords,PropagandaPhrases,Notes");
 
@@ -332,12 +327,12 @@ namespace WebExplorationProject.Analysis
                     EscapeCsv(r.Notes)));
             }
 
-            Log.Information("[{src}] Ranking saved: {path}", sourceName, outputPath);
+            Log.Information("[{src}] Ranking saved: {path}", sourceName, outputFilePath);
         }
 
         private void SaveRankingDetails(List<PageRanking> rankings, string sourceName)
         {
-            var detailsPath = Path.Combine(_dataPath, $"{sourceName}_ranking_details.txt");
+            var detailsPath = Path.Combine(_outputPath, $"{sourceName}_ranking_details.txt");
             var sb = new StringBuilder();
 
             sb.AppendLine($"=== RANKING REPORT: {sourceName} ===");

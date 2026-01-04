@@ -1,13 +1,13 @@
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using WebExplorationProject.Analysis;
+using WebExplorationProject.Helpers;
 using WebExplorationProject.Models;
 
 namespace WebExplorationProject.Tasks
 {
     /// <summary>
     /// Task 4: Classification with Cross-Validation.
-    /// Uses clustering results from Task 3 as labels and trains classifiers.
     /// 
     /// Algorithms:
     /// - FastTree (Decision Tree) with 2 parameter sets
@@ -21,7 +21,7 @@ namespace WebExplorationProject.Tasks
         private readonly IConfiguration _configuration;
 
         public string Name => "Classification Task";
-        public string Description => "Cross-validation classification (2 algorithms × 2 params × K=2,4) ? 8 results";
+        public string Description => "Cross-validation (2 algorithms x 2 params x K=2,4) -> 8 results";
 
         public ClassificationTask(IConfiguration configuration)
         {
@@ -33,16 +33,17 @@ namespace WebExplorationProject.Tasks
             Log.Information("=== TASK 4: Classification with Cross-Validation ===");
             Log.Information(Description);
 
-            // Get data path
-            var projectDir = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent?.FullName
-                ?? AppContext.BaseDirectory;
-            var dataPath = Path.Combine(projectDir, "data");
+            var clusteringPath = DataPaths.ClusteringPath;
+            var classificationPath = DataPaths.ClassificationPath;
 
-            if (!Directory.Exists(dataPath))
+            if (!Directory.Exists(clusteringPath))
             {
-                Log.Error("Data directory not found: {path}. Run Tasks 1-3 first.", dataPath);
+                Log.Error("Clustering data not found: {path}. Run Task 3 first.", clusteringPath);
                 return;
             }
+
+            Log.Information("Input: {input}", clusteringPath);
+            Log.Information("Output: {output}", classificationPath);
 
             // Load configuration
             int crossValidationFolds = 5;
@@ -51,7 +52,7 @@ namespace WebExplorationProject.Tasks
                 crossValidationFolds = folds;
             }
 
-            int[] groupCounts = { 2, 4 }; // K=2 and K=4
+            int[] groupCounts = { 2, 4 };
             var groupCountsStr = _configuration["Classification:GroupCounts"];
             if (!string.IsNullOrEmpty(groupCountsStr))
             {
@@ -68,10 +69,10 @@ namespace WebExplorationProject.Tasks
             Log.Information("  Parameter sets per algorithm: 2");
             Log.Information("  Total experiments: {count}", 4 * groupCounts.Length);
 
-            var classificationService = new ClassificationService(dataPath, crossValidationFolds);
+            var classificationService = new ClassificationService(clusteringPath, classificationPath, crossValidationFolds);
 
             // Find available clustering results
-            var sources = FindAvailableSources(dataPath, groupCounts);
+            var sources = FindAvailableSources(clusteringPath, groupCounts);
 
             if (sources.Count == 0)
             {
@@ -98,13 +99,10 @@ namespace WebExplorationProject.Tasks
             // Generate combined report if multiple sources
             if (allResults.Count > 1)
             {
-                GenerateCombinedReport(allResults, dataPath);
+                GenerateCombinedReport(allResults, classificationPath);
             }
 
-            Log.Information("\nTask 4 completed. Check 'data' folder for classification results.");
-            Log.Information("Files generated:");
-            Log.Information("  - {{source}}_classification_results.csv");
-            Log.Information("  - {{source}}_classification_report.txt");
+            Log.Information("\nTask 4 completed. Results saved to: {path}", classificationPath);
         }
 
         private void LogResultsSummary(List<ClassificationResult> results, string source)

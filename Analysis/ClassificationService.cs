@@ -19,17 +19,19 @@ namespace WebExplorationProject.Analysis
     /// </summary>
     public class ClassificationService
     {
-        private readonly string _dataPath;
+        private readonly string _inputPath;
+        private readonly string _outputPath;
         private readonly MLContext _mlContext;
         private readonly int _crossValidationFolds;
 
-        public ClassificationService(string dataPath, int crossValidationFolds = 5)
+        public ClassificationService(string inputPath, string outputPath, int crossValidationFolds = 5)
         {
-            _dataPath = dataPath;
+            _inputPath = inputPath;
+            _outputPath = outputPath;
             _mlContext = new MLContext(seed: 42);
             _crossValidationFolds = crossValidationFolds;
 
-            Directory.CreateDirectory(_dataPath);
+            Directory.CreateDirectory(_outputPath);
         }
 
         /// <summary>
@@ -43,7 +45,6 @@ namespace WebExplorationProject.Analysis
             {
                 Log.Information("[{src}] Running classification experiments for K={k}", sourceName, k);
 
-                // Load data
                 var data = LoadClusteringData(sourceName, k);
                 if (data.Count == 0)
                 {
@@ -53,10 +54,8 @@ namespace WebExplorationProject.Analysis
 
                 Log.Information("[{src}] Loaded {count} samples for K={k}", sourceName, data.Count, k);
 
-                // Define experiments
                 var experiments = CreateExperiments(k);
 
-                // Run each experiment
                 foreach (var experiment in experiments)
                 {
                     Log.Information("[{src}] Running: {algo} ({params}) for K={k}",
@@ -70,11 +69,50 @@ namespace WebExplorationProject.Analysis
                 }
             }
 
-            // Save results
             SaveResultsToCsv(allResults, sourceName);
             SaveDetailedReport(allResults, sourceName);
 
             return allResults;
+        }
+
+        private List<ClassificationInput> LoadClusteringData(string sourceName, int k)
+        {
+            // Read from input path (clustering folder)
+            var csvPath = Path.Combine(_inputPath, $"{sourceName}_clusters_k{k}.csv");
+
+            if (!File.Exists(csvPath))
+            {
+                Log.Warning("Clustering file not found: {path}", csvPath);
+                return new List<ClassificationInput>();
+            }
+
+            var data = new List<ClassificationInput>();
+            var lines = File.ReadAllLines(csvPath, Encoding.UTF8).Skip(1);
+
+            foreach (var line in lines)
+            {
+                var fields = SplitCsvLine(line);
+                if (fields.Length < 10) continue;
+
+                try
+                {
+                    data.Add(new ClassificationInput
+                    {
+                        Label = uint.Parse(fields[0]),
+                        Url = fields[3],
+                        PositionScore = float.Parse(fields[6], CultureInfo.InvariantCulture),
+                        ReferenceScore = float.Parse(fields[7], CultureInfo.InvariantCulture),
+                        SpecialistScore = float.Parse(fields[8], CultureInfo.InvariantCulture),
+                        CredibilityScore = float.Parse(fields[9], CultureInfo.InvariantCulture)
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Log.Warning("Error parsing line: {error}", ex.Message);
+                }
+            }
+
+            return data;
         }
 
         private List<ClassificationExperiment> CreateExperiments(int numberOfGroups)
@@ -207,45 +245,6 @@ namespace WebExplorationProject.Analysis
             });
         }
 
-        private List<ClassificationInput> LoadClusteringData(string sourceName, int k)
-        {
-            var csvPath = Path.Combine(_dataPath, $"{sourceName}_clusters_k{k}.csv");
-
-            if (!File.Exists(csvPath))
-            {
-                Log.Warning("Clustering file not found: {path}", csvPath);
-                return new List<ClassificationInput>();
-            }
-
-            var data = new List<ClassificationInput>();
-            var lines = File.ReadAllLines(csvPath, Encoding.UTF8).Skip(1);
-
-            foreach (var line in lines)
-            {
-                var fields = SplitCsvLine(line);
-                if (fields.Length < 10) continue;
-
-                try
-                {
-                    data.Add(new ClassificationInput
-                    {
-                        Label = uint.Parse(fields[0]),  // ClusterId
-                        Url = fields[3],
-                        PositionScore = float.Parse(fields[6], CultureInfo.InvariantCulture),
-                        ReferenceScore = float.Parse(fields[7], CultureInfo.InvariantCulture),
-                        SpecialistScore = float.Parse(fields[8], CultureInfo.InvariantCulture),
-                        CredibilityScore = float.Parse(fields[9], CultureInfo.InvariantCulture)
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Log.Warning("Error parsing line: {error}", ex.Message);
-                }
-            }
-
-            return data;
-        }
-
         private int[,] ExtractConfusionMatrix(ConfusionMatrix cm)
         {
             var size = cm.NumberOfClasses;
@@ -264,11 +263,11 @@ namespace WebExplorationProject.Analysis
 
         private void SaveResultsToCsv(List<ClassificationResult> results, string sourceName)
         {
-            var csvPath = Path.Combine(_dataPath, $"{sourceName}_classification_results.csv");
+            // Write to output path (classification folder)
+            var csvPath = Path.Combine(_outputPath, $"{sourceName}_classification_results.csv");
 
             using var writer = new StreamWriter(csvPath, false, new UTF8Encoding(true));
 
-            // Header
             writer.WriteLine("Algorithm,Parameters,NumberOfGroups,Folds,Accuracy,MacroAccuracy,MicroAccuracy,LogLoss,LogLossReduction,TrainingTime");
 
             foreach (var r in results)
@@ -291,16 +290,17 @@ namespace WebExplorationProject.Analysis
 
         private void SaveDetailedReport(List<ClassificationResult> results, string sourceName)
         {
-            var reportPath = Path.Combine(_dataPath, $"{sourceName}_classification_report.txt");
+            // Write to output path
+            var reportPath = Path.Combine(_outputPath, $"{sourceName}_classification_report.txt");
             var sb = new StringBuilder();
 
-            sb.AppendLine($"???????????????????????????????????????????????????????????????????????????");
+            sb.AppendLine($"---------------------------------------------------------------------------");
             sb.AppendLine($"                    CLASSIFICATION REPORT: {sourceName}");
-            sb.AppendLine($"???????????????????????????????????????????????????????????????????????????");
+            sb.AppendLine($"---------------------------------------------------------------------------");
             sb.AppendLine($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine();
             sb.AppendLine("EXPERIMENT CONFIGURATION");
-            sb.AppendLine("?????????????????????????????????????????????????????????????????????????????");
+            sb.AppendLine($"---------------------------------------------------------------------------");
             sb.AppendLine($"Cross-Validation Folds: {_crossValidationFolds}");
             sb.AppendLine($"Random Seed: 42 (for reproducibility)");
             sb.AppendLine();
@@ -325,16 +325,16 @@ namespace WebExplorationProject.Analysis
 
             foreach (var group in groupedResults)
             {
-                sb.AppendLine($"???????????????????????????????????????????????????????????????????????????");
+                sb.AppendLine($"---------------------------------------------------------------------------");
                 sb.AppendLine($"                         K = {group.Key} GROUPS");
-                sb.AppendLine($"???????????????????????????????????????????????????????????????????????????");
+                sb.AppendLine($"---------------------------------------------------------------------------");
                 sb.AppendLine();
 
                 // Summary table
                 sb.AppendLine("RESULTS SUMMARY:");
-                sb.AppendLine("?????????????????????????????????????????????????????????????????????????????");
+                sb.AppendLine($"---------------------------------------------------------------------------");
                 sb.AppendLine($"{"Algorithm",-25} {"Parameters",-35} {"Accuracy",-12} {"Time(s)",-10}");
-                sb.AppendLine("?????????????????????????????????????????????????????????????????????????????");
+                sb.AppendLine($"---------------------------------------------------------------------------");
 
                 foreach (var r in group.OrderByDescending(r => r.Accuracy))
                 {
@@ -396,9 +396,9 @@ namespace WebExplorationProject.Analysis
             }
 
             // Overall summary
-            sb.AppendLine("???????????????????????????????????????????????????????????????????????????");
+            sb.AppendLine($"---------------------------------------------------------------------------");
             sb.AppendLine("                           OVERALL SUMMARY");
-            sb.AppendLine("???????????????????????????????????????????????????????????????????????????");
+            sb.AppendLine($"---------------------------------------------------------------------------");
             sb.AppendLine();
 
             var bestResult = results.OrderByDescending(r => r.Accuracy).First();
@@ -413,7 +413,7 @@ namespace WebExplorationProject.Analysis
 
             // Analysis
             sb.AppendLine("ANALYSIS:");
-            sb.AppendLine("?????????????????????????????????????????????????????????????????????????????");
+            sb.AppendLine($"---------------------------------------------------------------------------");
 
             var k2Results = results.Where(r => r.NumberOfGroups == 2).ToList();
             var k4Results = results.Where(r => r.NumberOfGroups == 4).ToList();
@@ -465,7 +465,7 @@ namespace WebExplorationProject.Analysis
             }
 
             sb.AppendLine();
-            sb.AppendLine("?????????????????????????????????????????????????????????????????????????????");
+            sb.AppendLine($"---------------------------------------------------------------------------");
             sb.AppendLine("END OF REPORT");
 
             File.WriteAllText(reportPath, sb.ToString(), Encoding.UTF8);
