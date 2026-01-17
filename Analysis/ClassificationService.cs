@@ -429,13 +429,13 @@ namespace WebExplorationProject.Analysis
 
                 if (avgK2 > avgK4)
                 {
-                    sb.AppendLine("  ? Classification is easier with fewer groups (K=2).");
-                    sb.AppendLine("    This is expected as binary classification has simpler decision boundaries.");
+                    sb.AppendLine("  -> Classification is easier with fewer groups (K=2).");
+                    sb.AppendLine("     This is expected as binary classification has simpler decision boundaries.");
                 }
                 else
                 {
-                    sb.AppendLine("  ? Interestingly, K=4 classification performed better.");
-                    sb.AppendLine("    This may indicate that the data has natural 4-cluster structure.");
+                    sb.AppendLine("  -> Interestingly, K=4 classification performed better.");
+                    sb.AppendLine("     This may indicate that the data has natural 4-cluster structure.");
                 }
             }
 
@@ -454,13 +454,13 @@ namespace WebExplorationProject.Analysis
 
                 if (avgFastTree > avgSdca)
                 {
-                    sb.AppendLine("  ? FastTree (decision tree) outperformed SDCA.");
-                    sb.AppendLine("    This suggests non-linear relationships between features.");
+                    sb.AppendLine("  -> FastTree (decision tree) outperformed SDCA.");
+                    sb.AppendLine("     This suggests non-linear relationships between features.");
                 }
                 else
                 {
-                    sb.AppendLine("  ? SDCA (linear classifier) outperformed FastTree.");
-                    sb.AppendLine("    This suggests mostly linear separability between classes.");
+                    sb.AppendLine("  -> SDCA (linear classifier) outperformed FastTree.");
+                    sb.AppendLine("     This suggests mostly linear separability between classes.");
                 }
             }
 

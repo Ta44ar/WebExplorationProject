@@ -17,7 +17,7 @@ namespace WebExplorationProject.Tasks
         private readonly HttpClient _httpClient;
 
         public string Name => "Crawling Task";
-        public string Description => "Search engines (Google/Brave) → Crawling (BFS/DFS) → Graph generation (CSV/DOT/PNG)";
+        public string Description => "Search engines (Google/Brave) -> Crawling (BFS/DFS) -> Graph generation (CSV/DOT/PNG)";
 
         public CrawlingTask(IConfiguration configuration, HttpClient httpClient)
         {
